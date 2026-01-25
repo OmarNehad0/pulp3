@@ -1,4 +1,15 @@
-const { Client, GatewayIntentBits, Partials, Routes, ActionRowBuilder, StringSelectMenuBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, EmbedBuilder } = require("discord.js");
+const {
+  Client,
+  GatewayIntentBits,
+  Partials,
+  Routes,
+  ActionRowBuilder,
+  StringSelectMenuBuilder,
+  ModalBuilder,
+  TextInputBuilder,
+  TextInputStyle,
+  EmbedBuilder
+} = require("discord.js");
 const { REST } = require("@discordjs/rest");
 const fs = require("fs");
 
@@ -109,7 +120,8 @@ function buildRowsForFiles(files) {
   return rows;
 }
 
-async function sendMenus(interaction) {
+
+async function sendMenus(interaction, type) {
   const allRows = buildRowsForFiles(JSON_FILES);
   const chunks = [];
 
@@ -117,19 +129,60 @@ async function sendMenus(interaction) {
     chunks.push(allRows.slice(i, i + 5));
   }
 
-  // FIRST message = update interaction
-  const first = chunks[0];
-  await interaction.update({
-    components: first,
-  });
+  // ====== IF CALLED FROM /start COMMAND ======
+  if (type === "command") {
+    await interaction.deferReply({ ephemeral: true });
 
-  // FOLLOW UP for remaining chunks
-  for (let i = 1; i < chunks.length; i++) {
-    await interaction.followUp({
-      components: chunks[i],
+    await interaction.editReply({
+      content: "Choose a boss:",
+      components: chunks[0]
     });
+
+    for (let i = 1; i < chunks.length; i++) {
+      await interaction.followUp({
+        content: "Choose a boss:",
+        components: chunks[i],
+        ephemeral: true
+      });
+    }
+    return;
+  }
+
+  // ====== IF CALLED FROM SELECT MENU (reset) ======
+  if (type === "select") {
+    await interaction.update({
+      content: "Choose a boss:",
+      components: chunks[0]
+    });
+
+    for (let i = 1; i < chunks.length; i++) {
+      await interaction.followUp({
+        content: "Choose a boss:",
+        components: chunks[i],
+        ephemeral: true
+      });
+    }
+    return;
+  }
+
+  // ====== IF CALLED FROM MODAL SUBMIT ======
+  if (type === "modal") {
+    await interaction.followUp({
+      content: "Choose a boss:",
+      components: chunks[0],
+      ephemeral: true
+    });
+
+    for (let i = 1; i < chunks.length; i++) {
+      await interaction.followUp({
+        content: "Choose a boss:",
+        components: chunks[i],
+        ephemeral: true
+      });
+    }
   }
 }
+
 
 client.on("ready", async () => {
   console.log(`Logged in as ${client.user.tag}`);
@@ -171,7 +224,7 @@ client.on("interactionCreate", async (interaction) => {
         return interaction.reply({ content: "❌ You don’t have permission.", flags: 64 });
       }
 
-      await sendMenus(interaction);
+      await sendMenus(interaction, "command");
     }
   }
 
@@ -237,11 +290,12 @@ client.on("interactionCreate", async (interaction) => {
     await interaction.reply({ embeds: [embed], flags: 64 });
 
     // RESET menus
-    await sendMenus(interaction);
+    await sendMenus(interaction, "modal");
   }
 });
 
 client.login(TOKEN);
+
 
 
 
