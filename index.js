@@ -1,4 +1,9 @@
-const { Client, GatewayIntentBits, Partials, Routes,ActionRowBuilder, SelectMenuBuilder, StringSelectMenuBuilder,ModalBuilder, TextInputBuilder, TextInputStyle,ButtonBuilder, ButtonStyle, EmbedBuilder, PermissionFlagsBits} = require("discord.js");
+const {
+  Client, GatewayIntentBits, Partials,
+  ActionRowBuilder, StringSelectMenuBuilder,
+  ModalBuilder, TextInputBuilder, TextInputStyle,
+  ButtonBuilder, ButtonStyle, EmbedBuilder
+} = require("discord.js");
 
 const { REST } = require("@discordjs/rest");
 const fs = require("fs");
@@ -61,12 +66,6 @@ function loadBosses(filePath) {
   }
 }
 
-function formatPrice(price) {
-  if (price >= 1_000_000) return `${(price / 1_000_000).toFixed(1)}m`;
-  if (price >= 1_000) return `${(price / 1_000).toFixed(1)}k`;
-  return price.toString();
-}
-
 function hasAllowedRole(member) {
   return member.roles.cache.some(r => ALLOWED_ROLE_IDS.has(r.id));
 }
@@ -123,13 +122,13 @@ client.on("interactionCreate", async (interaction) => {
 
     if (interaction.commandName === "pvm_discount") {
       discountPercent = interaction.options.getInteger("percent");
-      await interaction.reply({ content: `✅ Discount set to **${discountPercent}%**`, ephemeral: true });
+      await interaction.reply({ content: `✅ Discount set to **${discountPercent}%**`, flags: 64 });
     }
 
     if (interaction.commandName === "start") {
 
       if (!hasAllowedRole(interaction.member)) {
-        return interaction.reply({ content: "❌ You don’t have permission.", ephemeral: true });
+        return interaction.reply({ content: "❌ You don’t have permission.", flags: 64 });
       }
 
       await interaction.reply("https://i.postimg.cc/HW8Rh9t2/Header.gif");
@@ -138,10 +137,10 @@ client.on("interactionCreate", async (interaction) => {
       const voucherLink = "https://www.sythe.org/threads/pulp-services-vouch-thread/";
 
       const chunkSize = 3;
+
       for (let i = 0; i < JSON_FILES.length; i += chunkSize) {
         const chunk = JSON_FILES.slice(i, i + chunkSize);
 
-        // 🔥 NEW: each select gets its own row
         const rows = [];
 
         chunk.forEach(file => {
@@ -160,8 +159,7 @@ client.on("interactionCreate", async (interaction) => {
             .setPlaceholder(`${EMOJI_MAP[file] || "🔨"}${file.replace(".json", "")}`)
             .addOptions(options);
 
-          const row = new ActionRowBuilder().addComponents(menu);
-          rows.push(row);
+          rows.push(new ActionRowBuilder().addComponents(menu));
         });
 
         await interaction.followUp({ components: rows });
@@ -184,7 +182,7 @@ client.on("interactionCreate", async (interaction) => {
     }
   }
 
-  if (interaction.isSelectMenu()) {
+  if (interaction.isStringSelectMenu()) {
     const [jsonFile, bossName] = interaction.values[0].split("|");
 
     const modal = new ModalBuilder()
@@ -210,7 +208,7 @@ client.on("interactionCreate", async (interaction) => {
     const bosses = loadBosses(jsonFile);
     const boss = bosses.find(b => b.name === bossName);
 
-    if (!boss) return interaction.reply({ content: "Boss not found.", ephemeral: true });
+    if (!boss) return interaction.reply({ content: "Boss not found.", flags: 64 });
 
     await logInteraction(interaction.user, bossName, jsonFile, killCount);
 
@@ -243,35 +241,10 @@ client.on("interactionCreate", async (interaction) => {
       embed.setThumbnail(boss.items[0].image);
     }
 
-    await interaction.reply({ embeds: [embed], ephemeral: true });
-
-    // ✅ RESET dropdowns (like your JS snippet)
-    const message = interaction.message;
-    if (message) {
-      const newComponents = message.components.map(row => {
-        const newRow = ActionRowBuilder.from(row);
-        newRow.components = newRow.components.map(comp => {
-          if (comp.customId && comp.customId.startsWith("boss_select:")) {
-            const file = comp.customId.split(":")[1];
-            const bosses = loadBosses(file);
-
-            return new StringSelectMenuBuilder()
-              .setCustomId(comp.customId)
-              .setPlaceholder(`${EMOJI_MAP[file] || "🔨"}${file.replace(".json", "")}`)
-              .addOptions(bosses.map(b => ({
-                label: b.name,
-                value: `${file}|${b.name}`,
-                description: `Boss ${b.name}`,
-                emoji: b.emoji || "🔨"
-              })));
-          }
-          return comp;
-        });
-        return newRow;
-      });
-
-      await interaction.update({ components: newComponents });
-    }
+    // ✅ ONLY reply (no update)
+    await interaction.reply({ embeds: [embed], flags: 64 });
   }
 });
+
 client.login(TOKEN);
+
