@@ -1,4 +1,4 @@
-const {Client, GatewayIntentBits, Partials,Routes,ActionRowBuilder, StringSelectMenuBuilder,ModalBuilder, TextInputBuilder, TextInputStyle,ButtonBuilder, ButtonStyle, EmbedBuilder} = require("discord.js");
+const { Client, GatewayIntentBits, Partials, Routes, ActionRowBuilder, StringSelectMenuBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, ButtonBuilder, ButtonStyle, EmbedBuilder } = require("discord.js");
 const { REST } = require("@discordjs/rest");
 const fs = require("fs");
 
@@ -84,6 +84,39 @@ async function logInteraction(user, bossName, jsonFile, killCount) {
   await channel.send({ embeds: [embed] });
 }
 
+function buildRows() {
+  const rows = [];
+  const chunkSize = 3;
+
+  for (let i = 0; i < JSON_FILES.length; i += chunkSize) {
+    const chunk = JSON_FILES.slice(i, i + chunkSize);
+    const row = new ActionRowBuilder();
+
+    chunk.forEach(file => {
+      const bosses = loadBosses(file);
+      if (!bosses.length) return;
+
+      const options = bosses.map(b => ({
+        label: b.name,
+        value: `${file}|${b.name}`,
+        description: `Boss ${b.name}`,
+        emoji: b.emoji || "🔨"
+      }));
+
+      const menu = new StringSelectMenuBuilder()
+        .setCustomId(`boss_select:${file}`)
+        .setPlaceholder(`${EMOJI_MAP[file] || "🔨"}${file.replace(".json", "")}`)
+        .addOptions(options);
+
+      row.addComponents(menu);
+    });
+
+    rows.push(row);
+  }
+
+  return rows;
+}
+
 client.on("ready", async () => {
   console.log(`Logged in as ${client.user.tag}`);
 
@@ -125,54 +158,13 @@ client.on("interactionCreate", async (interaction) => {
         return interaction.reply({ content: "❌ You don’t have permission.", flags: 64 });
       }
 
-      await interaction.reply("https://i.postimg.cc/HW8Rh9t2/Header.gif");
+      // **DO NOT show reply**
+      await interaction.reply({ content: "Starting...", ephemeral: true });
+      await interaction.deleteReply();
 
-      const ticketLink = "https://discord.com/channels/1433450572702285966/1433916983505715327";
-      const voucherLink = "https://www.sythe.org/threads/pulp-services-vouch-thread/";
-
-      const chunkSize = 3;
-
-      for (let i = 0; i < JSON_FILES.length; i += chunkSize) {
-        const chunk = JSON_FILES.slice(i, i + chunkSize);
-
-        const rows = [];
-
-        chunk.forEach(file => {
-          const bosses = loadBosses(file);
-          if (!bosses.length) return;
-
-          const options = bosses.map(b => ({
-            label: b.name,
-            value: `${file}|${b.name}`,
-            description: `Boss ${b.name}`,
-            emoji: b.emoji || "🔨"
-          }));
-
-          const menu = new StringSelectMenuBuilder()
-            .setCustomId(`boss_select:${file}`)
-            .setPlaceholder(`${EMOJI_MAP[file] || "🔨"}${file.replace(".json", "")}`)
-            .addOptions(options);
-
-          rows.push(new ActionRowBuilder().addComponents(menu));
-        });
-
-        await interaction.followUp({ components: rows });
-      }
-
-      const buttonRow = new ActionRowBuilder()
-        .addComponents(
-          new ButtonBuilder()
-            .setLabel("🎟️ Open a ticket - Click Here")
-            .setStyle(ButtonStyle.Link)
-            .setURL(ticketLink),
-
-          new ButtonBuilder()
-            .setLabel("Our Sythe Vouches")
-            .setStyle(ButtonStyle.Link)
-            .setURL(voucherLink)
-        );
-
-      await interaction.followUp({ components: [buttonRow] });
+      // Send dropdowns
+      const rows = buildRows();
+      await interaction.followUp({ content: "Choose a boss:", components: rows });
     }
   }
 
@@ -193,34 +185,14 @@ client.on("interactionCreate", async (interaction) => {
     const row = new ActionRowBuilder().addComponents(killInput);
     modal.addComponents(row);
 
+    // ❌ No edit
+    await interaction.deferUpdate();
     await interaction.showModal(modal);
 
-    // ✅ RESET dropdown selection (so user can pick same again)
-    const resetComponents = interaction.message.components.map(row => {
-      const newRow = ActionRowBuilder.from(row);
-
-      newRow.components = newRow.components.map(comp => {
-        if (comp.customId && comp.customId.startsWith("boss_select:")) {
-          const file = comp.customId.split(":")[1];
-          const bosses = loadBosses(file);
-
-          return new StringSelectMenuBuilder()
-            .setCustomId(comp.customId)
-            .setPlaceholder(`${EMOJI_MAP[file] || "🔨"}${file.replace(".json", "")}`)
-            .addOptions(bosses.map(b => ({
-              label: b.name,
-              value: `${file}|${b.name}`,
-              description: `Boss ${b.name}`,
-              emoji: b.emoji || "🔨"
-            })));
-        }
-        return comp;
-      });
-
-      return newRow;
-    });
-
-    await interaction.message.edit({ components: resetComponents });
+    // ✅ delete old message and resend new menus (so selection resets)
+    await interaction.message.delete();
+    const rows = buildRows();
+    await interaction.channel.send({ content: "Choose a boss:", components: rows });
   }
 
   if (interaction.isModalSubmit()) {
@@ -268,3 +240,4 @@ client.on("interactionCreate", async (interaction) => {
 });
 
 client.login(TOKEN);
+
