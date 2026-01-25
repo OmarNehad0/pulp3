@@ -1,0 +1,31 @@
+[
+    {
+        "name": "Firecape",
+        "aliases": ["fc"],
+        "caption": "- Prices assuming Max Gear.\n- Max Stats & All Prayer Unlocked.\n- Prices may vary depending on stats and gear.\n- Open a ticket For No-Prayer Firecape.",
+        "items": [
+            {
+                "name": "Main (Twisted Bow)",
+                "price": 5,
+                "image": "https://oldschool.runescape.wiki/images/thumb/Fire_cape_detail.png/800px-Fire_cape_detail.png?f1d08"
+            },
+            {
+                "name": "Main (Bowfa)",
+                "price": 6.5,
+                "image": "https://oldschool.runescape.wiki/images/thumb/Fire_cape_detail.png/800px-Fire_cape_detail.png?f1d08"
+            },
+            {
+                "name": "Zerker (Twisted Bow)",
+                "price": 8,
+                "image": "https://oldschool.runescape.wiki/images/thumb/Fire_cape_detail.png/800px-Fire_cape_detail.png?f1d08"
+            },
+            {
+                "name": "Pure (Twisted Bow)",
+                "price": 10,
+                "image": "https://oldschool.runescape.wiki/images/thumb/Fire_cape_detail.png/800px-Fire_cape_detail.png?f1d08"
+            }
+        ],
+               "emoji" : "<:Firecape:1436149213959422052>"
+    }
+]
+
