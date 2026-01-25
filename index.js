@@ -64,8 +64,7 @@ const ALLOWED_ROLE_IDS = new Set([
 
 function loadBosses(filePath) {
   try {
-    const data = fs.readFileSync(filePath);
-    return JSON.parse(data);
+    return JSON.parse(fs.readFileSync(filePath));
   } catch {
     return [];
   }
@@ -75,26 +74,6 @@ function hasAllowedRole(member) {
   return member.roles.cache.some(r => ALLOWED_ROLE_IDS.has(r.id));
 }
 
-async function logInteraction(user, bossName, jsonFile, killCount) {
-  const channel = await client.channels.fetch(LOG_CHANNEL_ID);
-  const bosses = loadBosses(jsonFile);
-  const boss = bosses.find(b => b.name === bossName);
-
-  const embed = new EmbedBuilder()
-    .setTitle("🧾 Boss Calculation Log")
-    .setColor("Blue")
-    .addFields(
-      { name: "👤 User", value: `${user.tag} (${user.id})`, inline: false },
-      { name: "🐲 Boss", value: bossName, inline: false },
-      { name: "📂 Category", value: jsonFile.replace(".json", ""), inline: false },
-      { name: "⚔️ Kill Count", value: killCount.toString(), inline: false }
-    )
-    .setTimestamp();
-
-  if (boss && boss.image) embed.setThumbnail(boss.image);
-  await channel.send({ embeds: [embed] });
-}
-
 function buildRowsForFiles(files) {
   const rows = [];
 
@@ -102,17 +81,16 @@ function buildRowsForFiles(files) {
     const bosses = loadBosses(file);
     if (!bosses.length) return;
 
-    const options = bosses.map(b => ({
-      label: b.name,
-      value: `${file}|${b.name}`,
-      description: `Boss ${b.name}`,
-      emoji: b.emoji || "🔨"
-    }));
-
     const menu = new StringSelectMenuBuilder()
       .setCustomId(`boss_select:${file}`)
-      .setPlaceholder(`${EMOJI_MAP[file] || "🔨"}${file.replace(".json", "")}`)
-      .addOptions(options);
+      .setPlaceholder(`${EMOJI_MAP[file] || ""}${file.replace(".json", "")}`)
+      .addOptions(
+        bosses.map(b => ({
+          label: b.name,
+          value: `${file}|${b.name}`,
+          emoji: b.emoji || "🔨"
+        }))
+      );
 
     rows.push(new ActionRowBuilder().addComponents(menu));
   });
@@ -120,181 +98,124 @@ function buildRowsForFiles(files) {
   return rows;
 }
 
-
-async function sendMenus(interaction, type) {
-  const allRows = buildRowsForFiles(JSON_FILES);
-  const chunks = [];
-
-  for (let i = 0; i < allRows.length; i += 5) {
-    chunks.push(allRows.slice(i, i + 5));
-  }
-
-  // ====== IF CALLED FROM /start COMMAND ======
-  if (type === "command") {
-    await interaction.deferReply({ ephemeral: true });
-
-    await interaction.editReply({
-      content: "Choose a boss:",
-      components: chunks[0]
-    });
-
-    for (let i = 1; i < chunks.length; i++) {
-      await interaction.followUp({
-        content: "Choose a boss:",
-        components: chunks[i],
-        ephemeral: true
-      });
-    }
-    return;
-  }
-
-  // ====== IF CALLED FROM SELECT MENU (reset) ======
-  if (type === "select") {
-    await interaction.update({
-      content: "Choose a boss:",
-      components: chunks[0]
-    });
-
-    for (let i = 1; i < chunks.length; i++) {
-      await interaction.followUp({
-        content: "Choose a boss:",
-        components: chunks[i],
-        ephemeral: true
-      });
-    }
-    return;
-  }
-
-  // ====== IF CALLED FROM MODAL SUBMIT ======
-  if (type === "modal") {
-    await interaction.followUp({
-      content: "Choose a boss:",
-      components: chunks[0],
-      ephemeral: true
-    });
-
-    for (let i = 1; i < chunks.length; i++) {
-      await interaction.followUp({
-        content: "Choose a boss:",
-        components: chunks[i],
-        ephemeral: true
-      });
-    }
-  }
+async function logInteraction(user, bossName, jsonFile, killCount) {
+  const channel = await client.channels.fetch(LOG_CHANNEL_ID);
+  await channel.send({
+    embeds: [
+      new EmbedBuilder()
+        .setTitle("🧾 Boss Calculation Log")
+        .setColor("Blue")
+        .addFields(
+          { name: "👤 User", value: `${user.tag} (${user.id})` },
+          { name: "🐲 Boss", value: bossName },
+          { name: "📂 Category", value: jsonFile.replace(".json", "") },
+          { name: "⚔️ Kill Count", value: killCount.toString() }
+        )
+        .setTimestamp()
+    ]
+  });
 }
-
 
 client.on("ready", async () => {
   console.log(`Logged in as ${client.user.tag}`);
 
-  const commands = [
+  const rest = new REST({ version: "10" }).setToken(TOKEN);
+  await rest.put(
+    Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID),
     {
-      name: "pvm_discount",
-      description: "Set a discount percentage for all bosses",
-      options: [
+      body: [
         {
-          name: "percent",
-          description: "Discount percentage (e.g., 20)",
-          type: 4,
-          required: true
+          name: "pvm_discount",
+          description: "Set a discount percentage",
+          options: [{ name: "percent", type: 4, required: true }]
+        },
+        {
+          name: "start",
+          description: "Start the boss selector"
         }
       ]
-    },
-    {
-      name: "start",
-      description: "Start the boss selector"
     }
-  ];
-
-  const rest = new REST({ version: "10" }).setToken(TOKEN);
-  await rest.put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), { body: commands });
+  );
 });
 
-client.on("interactionCreate", async (interaction) => {
+client.on("interactionCreate", async interaction => {
 
-  if (interaction.isChatInputCommand()) {
-
-    if (interaction.commandName === "pvm_discount") {
-      discountPercent = interaction.options.getInteger("percent");
-      await interaction.reply({ content: `✅ Discount set to **${discountPercent}%**`, flags: 64 });
+  // ===== /start =====
+  if (interaction.isChatInputCommand() && interaction.commandName === "start") {
+    if (!hasAllowedRole(interaction.member)) {
+      return interaction.reply({ content: "❌ No permission.", flags: 64 });
     }
 
-    if (interaction.commandName === "start") {
-      if (!hasAllowedRole(interaction.member)) {
-        return interaction.reply({ content: "❌ You don’t have permission.", flags: 64 });
-      }
-
-      await sendMenus(interaction, "command");
-    }
+    await interaction.reply({
+      components: buildRowsForFiles(JSON_FILES),
+      ephemeral: false
+    });
   }
 
+  // ===== Discount =====
+  if (interaction.isChatInputCommand() && interaction.commandName === "pvm_discount") {
+    discountPercent = interaction.options.getInteger("percent");
+    return interaction.reply({ content: `✅ Discount set to ${discountPercent}%`, flags: 64 });
+  }
+
+  // ===== Select Menu =====
   if (interaction.isStringSelectMenu()) {
     const [jsonFile, bossName] = interaction.values[0].split("|");
 
     const modal = new ModalBuilder()
       .setCustomId(`killcount_modal:${jsonFile}|${bossName}`)
-      .setTitle("Kill Count Form");
+      .setTitle("Kill Count");
 
-    const killInput = new TextInputBuilder()
-      .setCustomId("kill_count")
-      .setLabel("Enter the number of kills")
-      .setStyle(TextInputStyle.Short)
-      .setRequired(true);
+    modal.addComponents(
+      new ActionRowBuilder().addComponents(
+        new TextInputBuilder()
+          .setCustomId("kill_count")
+          .setLabel("Number of kills")
+          .setStyle(TextInputStyle.Short)
+          .setRequired(true)
+      )
+    );
 
-    const row = new ActionRowBuilder().addComponents(killInput);
-    modal.addComponents(row);
+    // 🔥 THIS resets the placeholder
+    await interaction.update({
+      components: interaction.message.components
+    });
 
     await interaction.showModal(modal);
   }
 
+  // ===== Modal Submit =====
   if (interaction.isModalSubmit()) {
     const [jsonFile, bossName] = interaction.customId.split(":")[1].split("|");
-    const killCount = parseInt(interaction.fields.getTextInputValue("kill_count"));
+    const killCount = Number(interaction.fields.getTextInputValue("kill_count"));
 
-    const bosses = loadBosses(jsonFile);
-    const boss = bosses.find(b => b.name === bossName);
-
-    if (!boss) return interaction.reply({ content: "Boss not found.", flags: 64 });
+    const boss = loadBosses(jsonFile).find(b => b.name === bossName);
+    if (!boss) return;
 
     await logInteraction(interaction.user, bossName, jsonFile, killCount);
 
     const embed = new EmbedBuilder()
-      .setTitle(`**${boss.name}**`)
-      .setDescription(boss.caption || "No description available.")
+      .setTitle(boss.name)
       .setColor(0x8B0000);
 
-    if (discountPercent > 0) {
-      embed.addFields({ name: "Applied Discount", value: `${discountPercent}%`, inline: false });
-    }
-
     boss.items.forEach(item => {
-      const price = item.price * killCount;
-      const discounted = price * (1 - discountPercent / 100);
-
-      let value = `**${killCount} KC**\n`;
-      value += discountPercent > 0
-        ? `💵 Original: $${price.toFixed(2)}\n💵 After Discount: $${discounted.toFixed(2)}`
-        : `💵 Total: $${price.toFixed(2)}`;
+      const total = item.price * killCount;
+      const final = total * (1 - discountPercent / 100);
 
       embed.addFields({
         name: `${item.emoji || "🔨"} ${item.name}`,
-        value: value,
-        inline: false
+        value: discountPercent
+          ? `~~$${total.toFixed(2)}~~ → **$${final.toFixed(2)}**`
+          : `$${total.toFixed(2)}`
       });
     });
 
-    if (boss.items[0]?.image) {
-      embed.setThumbnail(boss.items[0].image);
-    }
-
-    await interaction.reply({ embeds: [embed], flags: 64 });
-
-    // RESET menus
-    await sendMenus(interaction, "modal");
+    await interaction.reply({ embeds: [embed], ephemeral: true });
   }
 });
 
 client.login(TOKEN);
+
 
 
 
