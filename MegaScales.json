@@ -1,0 +1,62 @@
+[
+{
+        "name": "Mystic Chinning",
+        "aliases": [
+            "Mystic Chinning"
+        ],
+        "caption": "- Login Service is +10%.\n- 1500+ Chins are Required Per Session. ",
+        "items": [
+            {
+                "name": "Mystic Chinning",
+                "price": 18,
+                "image": "https://oldschool.runescape.wiki/images/Skeletal_mystic_%282%29.png?50748"
+            }
+        ],
+        "emoji" : "<:Skeletalmystic:1456835571644108934>"
+    },
+    {
+        "name": "MegaScales - 100%",
+        "aliases": [
+            "100%"
+        ],
+        "caption": "- Requires 55+ Farming & 60+ Fishing & Cooking.\n- Additional costs:\n- Not able to fish/cook is +10%.\n- No Chins is +40%.\n- Login Service is +10%.\n- No Fish Eater is +2%.\n- Buying 3kc gets you 3% Discount.\n- Buying 5kc gets you 5% Discount.\n- Buying 10kc gets you 12% Discount.",
+        "items": [
+            {
+                "name": "MegaScale - 100% Purple Chance",
+                "price": 110,
+                "image": "https://oldschool.runescape.wiki/images/thumb/Great_Olm_%28Christmas%29.png/800px-Great_Olm_%28Christmas%29.png?48b39"
+            }
+        ],
+        "emoji" : "<:PeepoPurple:1457056806697308210>"
+    },
+{
+        "name": "100% +1 Prayer Scroll Protection",
+        "aliases": [
+            "100% +1"
+        ],
+        "caption": "- Requires 55+ Farming & 60+ Fishing & Cooking.\n- Additional costs:\n- Not able to fish/cook is +10%.\n- No Chins is +40%.\n- Login Service is +10%.\n- No Fish Eater is +2%.\n- Buying 3kc gets you 3% Discount.\n- Buying 5kc gets you 5% Discount.\n- Buying 10kc gets you 12% Discount.",
+        "items": [
+            {
+                "name": "100% Purple Chance +1 Prayer Scroll Protection",
+                "price": 230,
+                "image": "https://oldschool.runescape.wiki/images/thumb/Great_Olm_%28Christmas%29.png/800px-Great_Olm_%28Christmas%29.png?48b39"
+            }
+        ],
+        "emoji" : "<:PeepoPurple:1457056806697308210>"
+    },
+    {
+        "name": "100% +2 Prayer Scroll Protection",
+        "aliases": [
+            "100% +2"
+        ],
+        "caption": "- Requires 55+ Farming & 60+ Fishing & Cooking.\n- Additional costs:\n- Not able to fish/cook is +10%.\n- No Chins is +40%.\n- Login Service is +10%.\n- No Fish Eater is +2%.\n- Buying 3kc gets you 3% Discount.\n- Buying 5kc gets you 5% Discount.\n- Buying 10kc gets you 12% Discount.",
+        "items": [
+            {
+                "name": "100% Purple Chance +2 Prayer Scroll Protection",
+                "price": 370,
+                "image": "https://oldschool.runescape.wiki/images/thumb/Great_Olm_%28Christmas%29.png/800px-Great_Olm_%28Christmas%29.png?48b39"
+            }
+        ],
+        "emoji" : "<:PeepoPurple:1457056806697308210>"
+    }
+]
