@@ -1,0 +1,125 @@
+[ {
+        "name": "Dizana's Quiver - Login",
+        "aliases": ["quiver"],
+        "caption" : "- You keep all loot.\n- Prices assume having Max Gear, Max Stats & All Prayers Unlocked.\n- Prices may vary depending on stats and gear. \n- Using Parsec Would Cost +50%.",
+        "items": [
+            {
+                "name": "Quiver Main - Max Gear",
+                "price": 23.8,
+                "image" : "https://oldschool.runescape.wiki/images/thumb/Dizana%27s_quiver_detail.png/150px-Dizana%27s_quiver_detail.png?f6c23"
+            },
+            {
+                "name": "Quiver Main - Budget Gear",
+                "price": 34,
+                "image" : "https://oldschool.runescape.wiki/images/thumb/Dizana%27s_quiver_detail.png/150px-Dizana%27s_quiver_detail.png?f6c23"
+            },
+            {
+                "name": "Quiver Zerker - Max Gear",
+                "price": 38,
+                "image" : "https://oldschool.runescape.wiki/images/thumb/Dizana%27s_quiver_detail.png/150px-Dizana%27s_quiver_detail.png?f6c23"
+            },
+            {
+                "name": "Quiver Pure - Max Gear",
+                "price": 42,
+                "image" : "https://oldschool.runescape.wiki/images/thumb/Dizana%27s_quiver_detail.png/150px-Dizana%27s_quiver_detail.png?f6c23"
+            },
+            {
+                "name": "Sunfire Splinters Farm - Wave 1",
+                "price": 0.08,
+                "image" : "https://oldschool.runescape.wiki/images/thumb/Dizana%27s_quiver_detail.png/150px-Dizana%27s_quiver_detail.png?f6c23"
+            }
+        ],
+                "emoji" : "<:Dizanasquiver:1436150970261307534>"
+    },
+    {
+        "name": "Infernal Cape - Login",
+        "aliases": ["inf", "infernal cape", "infernal"],
+        "caption" : "- Prices assume having Max Gear, Max Stats & All Prayers Unlocked.\n- Prices may vary depending on stats and gear.\n- 10% Off If on Slayer Task.\n- Using Parsec Would Cost +50%.",
+        "items": [
+            {
+                "name": "Main (Twisted Bow)",
+                "price": 37.5,
+                "image": "https://oldschool.runescape.wiki/images/thumb/Infernal_cape_concept_4.gif/57px-Infernal_cape_concept_4.gif?9aa4d"
+            },
+            {
+                "name": "Main (Bowfa)",
+                "price": 43,
+                "image": "https://oldschool.runescape.wiki/images/thumb/Infernal_cape_concept_4.gif/57px-Infernal_cape_concept_4.gif?9aa4d"
+            },
+            {
+                "name": "Main (ACB)",
+                "price": 48,
+                "image": "https://oldschool.runescape.wiki/images/thumb/Infernal_cape_concept_4.gif/57px-Infernal_cape_concept_4.gif?9aa4d"
+            },
+            {
+                "name": "Zerker (Twisted Bow)",
+                "price": 52,
+                "image": "https://oldschool.runescape.wiki/images/thumb/Infernal_cape_concept_4.gif/57px-Infernal_cape_concept_4.gif?9aa4d"
+            },
+            {
+                "name": "Zerker (ACB)",
+                "price": 64,
+                "image": "https://oldschool.runescape.wiki/images/thumb/Infernal_cape_concept_4.gif/57px-Infernal_cape_concept_4.gif?9aa4d"
+            },
+            {
+                "name": "Pure (Twisted Bow)",
+                "price": 65,
+                "image": "https://oldschool.runescape.wiki/images/thumb/Infernal_cape_concept_4.gif/57px-Infernal_cape_concept_4.gif?9aa4d"
+            },
+            {
+                "name": "Pure (ACB)",
+                "price": 75,
+                "image": "https://oldschool.runescape.wiki/images/thumb/Infernal_cape_concept_4.gif/57px-Infernal_cape_concept_4.gif?9aa4d"
+            }
+        ],
+                "emoji" : "<:Infernalmaxcape:1436142417886838824>"
+    },
+    {
+        "name": "Fire Cape - Login",
+        "aliases": ["fc"],
+        "caption": "- Prices assuming Max Gear.\n- Max Stats & All Prayer Unlocked.\n- Prices may vary depending on stats and gear.\n- Open a ticket For No-Prayer Firecape.",
+        "items": [
+            {
+                "name": "Main (Twisted Bow)",
+                "price": 5,
+                "image": "https://oldschool.runescape.wiki/images/thumb/Fire_cape_detail.png/800px-Fire_cape_detail.png?f1d08"
+            },
+            {
+                "name": "Main (Bowfa)",
+                "price": 6.5,
+                "image": "https://oldschool.runescape.wiki/images/thumb/Fire_cape_detail.png/800px-Fire_cape_detail.png?f1d08"
+            },
+            {
+                "name": "Zerker (Twisted Bow)",
+                "price": 8,
+                "image": "https://oldschool.runescape.wiki/images/thumb/Fire_cape_detail.png/800px-Fire_cape_detail.png?f1d08"
+            },
+            {
+                "name": "Pure (Twisted Bow)",
+                "price": 10,
+                "image": "https://oldschool.runescape.wiki/images/thumb/Fire_cape_detail.png/800px-Fire_cape_detail.png?f1d08"
+            }
+        ],
+               "emoji" : "<:Firecape:1436149213959422052>"
+    },
+    {
+        "name": "6 Jad Challenge - Login",
+        "aliases": ["sixjad", "6jad", "vijad", "jad6", "jadsix"],
+        "caption" : "- Prices assume having Max Gear, Max Stats & All Prayers Unlocked.\n- Prices may vary depending on stats and gear.\n- Using Parsec Would Cost +50%",
+        "items": [
+            {
+                "name": "Max Gear (Twisted Bow)",
+                "price": 22,
+                "image" : "https://oldschool.runescape.wiki/images/thumb/JalTok-Jad.png/280px-JalTok-Jad.png?7e369"
+            },
+            {
+                "name": "Max Gear (Toxic Blowpipe - BP)",
+                "price": 28,
+                "image" : "https://oldschool.runescape.wiki/images/thumb/JalTok-Jad.png/280px-JalTok-Jad.png?7e369"
+            }
+        ],
+                "emoji" : "<:JalRekJad:1454552433006088335>"
+    }
+]
+
+
