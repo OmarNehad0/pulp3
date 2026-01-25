@@ -1,0 +1,59 @@
+[
+    {
+      "name": "Theatre of Blood - Login",
+      "caption" : "- You keep all loot.\n- Prices Below are per KC assuming Max Gear & Stats.\n- Prices may vary depending on Stats & Gear.",
+      "aliases": [
+        "tob",
+        "Normal TOB - Login"
+      ],
+      "items": [
+        {
+          "name": "Entry Mode TOB (1+1)",
+          "price": 1.9,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Lil%27_Zik.png/1024px-Lil%27_Zik.png?5a023"
+        },
+        {
+          "name": "TOB - Scythe & Max Gear",
+          "price": 2.4,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Lil%27_Zik.png/1024px-Lil%27_Zik.png?5a023"
+        },
+        {
+          "name": "TOB - Blade & Decent Gear",
+          "price": 2.8,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Lil%27_Zik.png/1024px-Lil%27_Zik.png?5a023"
+        },
+        {
+          "name": "TOB - Tent Whip & Decent Gear",
+          "price": 3,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Lil%27_Zik.png/1024px-Lil%27_Zik.png?5a023"
+        }
+      ],
+         "emoji" : "<:VerzikVitur:1456842671544078416>"
+    },
+    {
+      "name": "Hard Mode Tob - Logins",
+      "caption" : "- You keep all loot.\n- Prices Below are per KC assuming Max Gear & Stats.\n- Prices may vary depending on Stats & Gear.",
+      "aliases": [
+        "hmt","hardmode tob","hm tob","hmtob"
+      ],
+      "items": [
+        {
+          "name": "HMT - Scythe & Max Gear",
+          "price": 3.4,
+          "image" : "https://oldschool.runescape.wiki/images/Sanguine_scythe_of_vitur_detail.png?200dd"
+        },
+        {
+          "name": "HMT - Tent Whip & Decent Gear",
+          "price": 5,
+          "image" : "https://oldschool.runescape.wiki/images/Sanguine_scythe_of_vitur_detail.png?200dd"
+        },
+        {
+          "name": "HMT - Scythe (Zerker or Pure Built)",
+          "price": 5.4,
+          "image" : "https://oldschool.runescape.wiki/images/Sanguine_scythe_of_vitur_detail.png?200dd"
+        }
+      ],
+         "emoji" : "<:Sanguinescytheofvitur:1456842880332333086>"
+    }
+  ]
+
