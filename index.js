@@ -183,6 +183,7 @@ client.on("interactionCreate", async (interaction) => {
   }
 
   if (interaction.isStringSelectMenu()) {
+
     const [jsonFile, bossName] = interaction.values[0].split("|");
 
     const modal = new ModalBuilder()
@@ -199,6 +200,33 @@ client.on("interactionCreate", async (interaction) => {
     modal.addComponents(row);
 
     await interaction.showModal(modal);
+
+    // ✅ RESET dropdown selection (so user can pick same again)
+    const resetComponents = interaction.message.components.map(row => {
+      const newRow = ActionRowBuilder.from(row);
+
+      newRow.components = newRow.components.map(comp => {
+        if (comp.customId && comp.customId.startsWith("boss_select:")) {
+          const file = comp.customId.split(":")[1];
+          const bosses = loadBosses(file);
+
+          return new StringSelectMenuBuilder()
+            .setCustomId(comp.customId)
+            .setPlaceholder(`${EMOJI_MAP[file] || "🔨"}${file.replace(".json", "")}`)
+            .addOptions(bosses.map(b => ({
+              label: b.name,
+              value: `${file}|${b.name}`,
+              description: `Boss ${b.name}`,
+              emoji: b.emoji || "🔨"
+            })));
+        }
+        return comp;
+      });
+
+      return newRow;
+    });
+
+    await interaction.message.edit({ components: resetComponents });
   }
 
   if (interaction.isModalSubmit()) {
@@ -241,10 +269,8 @@ client.on("interactionCreate", async (interaction) => {
       embed.setThumbnail(boss.items[0].image);
     }
 
-    // ✅ ONLY reply (no update)
     await interaction.reply({ embeds: [embed], flags: 64 });
   }
 });
 
 client.login(TOKEN);
-
