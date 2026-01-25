@@ -1,10 +1,4 @@
-const {
-  Client, GatewayIntentBits, Partials,
-  ActionRowBuilder, StringSelectMenuBuilder,
-  ModalBuilder, TextInputBuilder, TextInputStyle,
-  ButtonBuilder, ButtonStyle, EmbedBuilder
-} = require("discord.js");
-
+const {Client, GatewayIntentBits, Partials,Routes,ActionRowBuilder, StringSelectMenuBuilder,ModalBuilder, TextInputBuilder, TextInputStyle,ButtonBuilder, ButtonStyle, EmbedBuilder} = require("discord.js");
 const { REST } = require("@discordjs/rest");
 const fs = require("fs");
 
