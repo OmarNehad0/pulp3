@@ -127,7 +127,14 @@ client.on("ready", async () => {
         {
           name: "pvm_discount",
           description: "Set a discount percentage",
-          options: [{ name: "percent", type: 4, required: true }]
+          options: [
+            {
+              name: "percent",
+              description: "Discount percentage (1–100)",
+              type: 4,
+              required: true
+            }
+          ]
         },
         {
           name: "start",
