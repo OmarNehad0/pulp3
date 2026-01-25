@@ -1,0 +1,57 @@
+[
+    {
+        "name": "COX - Challenge Mode - CM",
+        "aliases": [
+            "coxcm"
+        ],
+        "caption": "- You keep all loot.\n- Prices may vary depending on stats and gear",
+        "items": [
+            {
+                "name": "Challenge Mode - Solo (Max Gear & T Bow)",
+                "price": 4.25,
+                "image": "https://oldschool.runescape.wiki/images/thumb/Great_Olm_%28Christmas%29.png/800px-Great_Olm_%28Christmas%29.png?48b39"
+            },
+            {
+                "name": "Challenge Mode - Solo (Max Gear & Bowfa)",
+                "price": 5.6,
+                "image": "https://oldschool.runescape.wiki/images/thumb/Great_Olm_%28Christmas%29.png/800px-Great_Olm_%28Christmas%29.png?48b39"
+            },
+            {
+                "name": "Challenge Mode - Decent Gear (3-5 Man)",
+                "price": 3.9,
+                "image": "https://oldschool.runescape.wiki/images/thumb/Great_Olm_%28Christmas%29.png/800px-Great_Olm_%28Christmas%29.png?48b39"
+            }
+        ],
+        "emoji" : "<:Metamorphicdust:1454620098743763127>"
+    },
+    {
+        "name": "COX Solo",
+        "aliases": [
+            "coxsolo"
+        ],
+        "caption": "- You keep all loot.\n- Prices may vary depending on stats and gear",
+        "items": [
+            {
+                "name": "Normal Solo (Max Gear + T Bow)",
+                "price": 2.5,
+                "image": "https://oldschool.runescape.wiki/images/thumb/Great_Olm_%28Christmas%29.png/800px-Great_Olm_%28Christmas%29.png?48b39"
+            },
+            {
+                "name": "Normal Solo (Lance & Bowfa)",
+                "price": 2.85,
+                "image": "https://oldschool.runescape.wiki/images/thumb/Great_Olm_%28Christmas%29.png/800px-Great_Olm_%28Christmas%29.png?48b39"
+            },
+            {
+                "name": "Normal Solo (Average Gear & Bowfa)",
+                "price": 3.3,
+                "image": "https://oldschool.runescape.wiki/images/thumb/Great_Olm_%28Christmas%29.png/800px-Great_Olm_%28Christmas%29.png?48b39"
+            },
+            {
+                "name": "Normal Cox (Mass)",
+                "price": 1.8,
+                "image": "https://oldschool.runescape.wiki/images/thumb/Great_Olm_%28Christmas%29.png/800px-Great_Olm_%28Christmas%29.png?48b39"
+            }
+        ],
+        "emoji" : "<:Twistedbow:1454619219957387366>"
+    }
+]
