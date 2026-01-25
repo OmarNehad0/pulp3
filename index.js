@@ -109,8 +109,7 @@ function buildRowsForFiles(files) {
   return rows;
 }
 
-// --- SEND MENUS FUNCTION ---
-async function sendMenus(interactionOrChannel, isInteraction = true) {
+async function sendMenus(interaction, isReset = false) {
   const allRows = buildRowsForFiles(JSON_FILES);
   const chunks = [];
 
@@ -118,29 +117,22 @@ async function sendMenus(interactionOrChannel, isInteraction = true) {
     chunks.push(allRows.slice(i, i + 5));
   }
 
-  for (let i = 0; i < chunks.length; i++) {
-    if (i === 0) {
-      if (isInteraction) {
-        await interactionOrChannel.reply({
-          content: "Choose a boss:",
-          components: chunks[i],
-          ephemeral: true
-        });
-      } else {
-        await interactionOrChannel.send({
-          content: "Choose a boss:",
-          components: chunks[i]
-        });
-      }
-    } else {
-      await interactionOrChannel.followUp({
-        content: "Choose a boss:",
-        components: chunks[i],
-        ephemeral: true
-      });
-    }
+  // FIRST message = update interaction
+  const first = chunks[0];
+  await interaction.update({
+    content: "Choose a boss:",
+    components: first,
+  });
+
+  // FOLLOW UP for remaining chunks
+  for (let i = 1; i < chunks.length; i++) {
+    await interaction.followUp({
+      content: "Choose a boss:",
+      components: chunks[i],
+    });
   }
 }
+
 
 client.on("ready", async () => {
   console.log(`Logged in as ${client.user.tag}`);
@@ -182,9 +174,6 @@ client.on("interactionCreate", async (interaction) => {
       if (!hasAllowedRole(interaction.member)) {
         return interaction.reply({ content: "❌ You don’t have permission.", ephemeral: true });
       }
-
-      await interaction.deferReply({ ephemeral: true });
-      await interaction.deleteReply();
       await sendMenus(interaction, true);
     }
   }
@@ -215,7 +204,7 @@ client.on("interactionCreate", async (interaction) => {
     const bosses = loadBosses(jsonFile);
     const boss = bosses.find(b => b.name === bossName);
 
-    if (!boss) return interaction.reply({ content: "Boss not found.", ephemeral: true });
+    if (!boss) return interaction.reply({ content: "Boss not found.", flags: 64 });
 
     await logInteraction(interaction.user, bossName, jsonFile, killCount);
 
@@ -248,13 +237,10 @@ client.on("interactionCreate", async (interaction) => {
       embed.setThumbnail(boss.items[0].image);
     }
 
-    await interaction.reply({ embeds: [embed], ephemeral: true });
-
-    // 🔥 SEND NEW MENUS (RESET)
-    await sendMenus(interaction, true);
+    // Reply once with result
+    await interaction.reply({ embeds: [embed], flags: 64 });
+    await sendMenus(interaction);
   }
-});
-
 client.login(TOKEN);
 
 
