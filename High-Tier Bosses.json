@@ -1,0 +1,145 @@
+[{
+      "name": "Yama",
+      "aliases": [
+        "yama"
+      ],
+      "caption": "- Prices below are per kill.\n- Assuming Max Gear & Stats.\n- Upcharges may apply based on Gear.\n- You keep all loot.",
+      "items": [
+        {
+          "name": "Yama - Solo",
+          "price": 1.6,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Yama.png/560px-Yama.png?7653a"
+        },
+        {
+          "name": "Yama - Duo",
+          "price": 0.85,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Yama.png/560px-Yama.png?7653a"
+        }
+               ],
+          "emoji" : "<:Yama:1435675298631778536>"
+      },{
+      "name": "Yama Contracts",
+      "aliases": [
+        "contracts"
+      ],
+      "caption": "- Prices below are per kill.\n- Assuming Max Gear & Stats.\n- Upcharges may apply based on Gear.\n- You keep all loot.\n- Parsec +50%",
+      "items": [
+        {
+          "name": "Full Radiant Kit",
+          "price": 58,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Radiant_oathplate_chest_detail.png/800px-Radiant_oathplate_chest_detail.png?aef32"
+        },
+        {
+          "name": "Contract of glyphic attenuation",
+          "price": 16,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Yama.png/560px-Yama.png?7653a"
+        },
+        {
+          "name": "Contract of forfeit breath",
+          "price": 13,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Radiant_oathplate_chest_detail.png/800px-Radiant_oathplate_chest_detail.png?aef32"
+        },
+        {
+          "name": "Contract of sensory clouding",
+          "price": 15,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Yama.png/560px-Yama.png?7653a"
+        },
+        {
+          "name": "Contract of divine severance",
+          "price": 13,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Radiant_oathplate_chest_detail.png/800px-Radiant_oathplate_chest_detail.png?aef32"
+        },
+        {
+          "name": "Contract of bloodied blows",
+          "price": 16,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Yama.png/560px-Yama.png?7653a"
+        },
+        {
+          "name": "Contract of shard acquisition",
+          "price": 26,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Radiant_oathplate_chest_detail.png/800px-Radiant_oathplate_chest_detail.png?aef32"
+        },
+        {
+          "name": "Pet Contract",
+          "price": 5,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Yama.png/560px-Yama.png?7653a"
+        }
+               ],
+          "emoji" : "<:Purifyingsigil:1435803158793162918>"
+      },
+      {
+      "name": "Doom of Mokhaiotl - Delve",
+      "aliases": [
+        "delve"
+      ],
+      "caption": "- Prices below are per kill.\n- Assuming Max Gear & Stats.\n- Upcharges may apply based on Gear.\n- +20% If No T Bow.\n- +10% If No Rigour.\n- You keep all loot.",
+      "items": [
+        {
+          "name": "Wave 1-8",
+          "price": 5,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Doom_of_Mokhaiotl.png/1024px-Doom_of_Mokhaiotl.png?e5edb"
+        },
+        {
+          "name": "Wave 1-6",
+          "price": 3,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Doom_of_Mokhaiotl.png/1024px-Doom_of_Mokhaiotl.png?e5edb"
+        },
+        {
+          "name": "Wave 1-4",
+          "price": 1.8,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Doom_of_Mokhaiotl.png/1024px-Doom_of_Mokhaiotl.png?e5edb"
+        },
+        {
+          "name": "Each Wave Starting From Wave 8+",
+          "price": 1.75,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Doom_of_Mokhaiotl.png/1024px-Doom_of_Mokhaiotl.png?e5edb"
+        }
+               ],
+          "emoji" : "<:DoomofMokhaiotl:1435689196374462504>"
+      },
+      {
+      "name": "The Nightmare",
+      "aliases": [
+        "nm"
+      ],
+      "caption": "- Prices below are per kill.\n- Assuming Max Gear & Stats.\n- Upcharges may apply based on Gear.\n- +10% If No Teleport.\n- You keep all loot.",
+      "items": [
+        {
+          "name": "The Nightmare (Max Gear - Solo)",
+          "price": 2.4,
+          "image" : "https://oldschool.runescape.wiki/images/The_Nightmare.png?0128a"
+        },
+        {
+          "name": "The Nightmare (Teams)",
+          "price": 1,
+          "image" : "https://oldschool.runescape.wiki/images/The_Nightmare.png?0128a"
+        }
+               ],
+          "emoji" : "<:The_Nightmare:1435668722076614697>"
+       },
+      {
+      "name": "Phosani's Nightmare",
+      "aliases": [
+        "pnm"
+      ],
+      "caption": "- Prices below are per kill.\n- Assuming Max Gear & Stats.\n- Upcharges may apply based on Gear.\n- +10% If No Teleport.\n- You keep all loot.",
+      "items": [
+        {
+          "name": "Phosani's Nightmare - Max W/ Scythe",
+          "price": 1.2,
+          "image" : "https://oldschool.runescape.wiki/images/The_Nightmare.png?0128a"
+        },
+        {
+          "name": "Phosani's Nightmare - Max W/ Inquisitor's Mace",
+          "price": 1.3,
+          "image" : "https://oldschool.runescape.wiki/images/The_Nightmare.png?0128a"
+        },
+        {
+          "name": "Phosani's Nightmare - Decent Gear W/ Bludgeon",
+          "price": 1.55,
+          "image" : "https://oldschool.runescape.wiki/images/The_Nightmare.png?0128a"
+        }
+               ],
+          "emoji" : "<:The_Nightmare:1435668722076614697>"
+        }
+]
