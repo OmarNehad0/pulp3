@@ -1,0 +1,107 @@
+[
+       {
+        "name": "Kree'arre",
+        "aliases": ["Arma"],
+        "caption": "- Prices are per kill assuming Max Setup & Stats.\n- You keep all loot.\n- Prices may vary depending on stats and gear.\n- +10% if Not On Task.\n- +10% if No COX Prayer.\n- +10 if No Black Chins. \n- +20% if No Red Chins.",
+        "items": [
+            {
+                "name": "Kree'arre - Tasked W/ T Bow, Chins & Rigour",
+                "price": 0.33,
+                "image" : "https://oldschool.runescape.wiki/images/thumb/Kree%27arra.png/800px-Kree%27arra.png?ba75c"
+            },
+            {
+                "name": "Kree'arre - Tasked W/ Bowfa & Rigour",
+                "price": 0.35,
+                "image" : "https://oldschool.runescape.wiki/images/thumb/Kree%27arra.png/800px-Kree%27arra.png?ba75c"
+            },
+            {
+                "name": "Kree'arre - Tasked W/ Shadow & Augury",
+                "price": 0.33,
+                "image" : "https://oldschool.runescape.wiki/images/thumb/Kree%27arra.png/800px-Kree%27arra.png?ba75c"}],
+                "emoji" : "<:Kreearra:1454630646805823549>"
+        },
+     {
+                "name": "General Graardor",
+                "aliases": ["Bandos"],
+                "caption" : "- Prices are per kill assuming Max Setup & Stats.\n- You keep all loot.\n- Prices may vary depending on stats and gear.\n- +10% if No COX Prayer.",
+                "items" : [
+
+               { "name": "General Graardor With Shadow & Augury",
+                 "price" : 0.24,
+                 "image" : "https://oldschool.runescape.wiki/images/thumb/General_Graardor.png/280px-General_Graardor.png?4dd90"
+               },
+               {
+                "name": "General Graardor With Bowfa & Rigour",
+                "price": 0.26,
+                "image" : "https://oldschool.runescape.wiki/images/thumb/General_Graardor.png/280px-General_Graardor.png?4dd90"
+               }],
+                "emoji" : "<:GeneralGraardor:1454630589910220983>"
+     },
+    {
+                "name": "Commander Zilyana",
+                "aliases": ["sara"],
+                "caption" : "- Prices are per kill assuming Max Setup & Stats.\n- You keep all loot.\n- Prices may vary depending on stats and gear.\n- +10% if No COX Prayer.",
+                "items" : [
+
+               { "name": "Zilyana With T Bow & Rigour",
+                 "price" : 0.24,
+                 "image" : "https://oldschool.runescape.wiki/images/thumb/Commander_Zilyana.png/250px-Commander_Zilyana.png?c5eaa"},
+               { "name": "Zilyana With Shadow & Augury",
+                 "price" : 0.25,
+                 "image" : "https://oldschool.runescape.wiki/images/thumb/Commander_Zilyana.png/250px-Commander_Zilyana.png?c5eaa"},
+              { "name": "Zilyana With Bowfa & Rigour",
+                 "price" : 0.26,
+                 "image" : "https://oldschool.runescape.wiki/images/thumb/Commander_Zilyana.png/250px-Commander_Zilyana.png?c5eaa"}],
+                "emoji" : "<:CommanderZilyana:1454630558457004072>"
+    },
+                         {
+                "name": "K'ril Tsutsaroth",
+                "aliases": ["zammy"],
+                "caption" : "- Prices are per kill assuming Max Setup & Stats.\n- You keep all loot.\n- Prices may vary depending on stats and gear.\n- +10% if Not On Task.\n- +10% if No COX Prayer.\n- Lightbearer is Required with Scorching.",
+                "items" : [
+
+               { "name": "K'ril - Tasked With Scorching & Rigour",
+                 "price" : 0.23,
+                 "image" : "https://oldschool.runescape.wiki/images/thumb/K%27ril_Tsutsaroth.png/280px-K%27ril_Tsutsaroth.png?73bda"
+               },
+               { "name": "K'ril - Tasked With T Bow & Rigour",
+                 "price" : 0.238,
+                 "image" : "https://oldschool.runescape.wiki/images/thumb/K%27ril_Tsutsaroth.png/280px-K%27ril_Tsutsaroth.png?73bda"
+                },
+                { "name": "K'ril - Tasked With Shadow & Augury",
+                 "price" : 0.24,
+                 "image" : "https://oldschool.runescape.wiki/images/thumb/K%27ril_Tsutsaroth.png/280px-K%27ril_Tsutsaroth.png?73bda"
+                },
+                { "name": "K'ril - Tasked with Bowfa & Rigour",
+                 "price" : 0.26,
+                 "image" : "https://oldschool.runescape.wiki/images/thumb/K%27ril_Tsutsaroth.png/280px-K%27ril_Tsutsaroth.png?73bda"
+                }],
+                "emoji" : "<:KrilTsutsaroth:1454630618863243435>"
+                },                         {
+                    "name": "Nex",
+                    "aliases": ["Nex"],
+                    "caption" : "- Prices are per kill assuming Max Setup & Stats.\n- You keep all loot.\n- Prices may vary depending on stats and gear.\n- +10% if No COX Prayer.\n- +10% if No Blood Fury For Small Party Sizes.",
+                    "items" : [
+    
+                   { "name": "Nex Login - Trio With T Bow",
+                     "price" : 1.35,
+                     "image" : "https://oldschool.runescape.wiki/images/thumb/Nex.png/800px-Nex.png?2a1b3"
+                },
+                { "name": "Nex Login - 4 Man With T Bow",
+                     "price" : 1.1,
+                     "image" : "https://oldschool.runescape.wiki/images/thumb/Nex.png/800px-Nex.png?2a1b3"
+                },
+                {  "name": "Nex Login (5-6 Man) With T Bow",
+                   "price" : 0.9,
+                   "image" : "https://oldschool.runescape.wiki/images/thumb/Nex.png/800px-Nex.png?2a1b3"
+                 },
+                 
+                 
+                 {  "name": "Nex Login - Mass",
+                 "price" : 0.4,
+                 "image" : "https://oldschool.runescape.wiki/images/thumb/Nex.png/800px-Nex.png?2a1b3"
+               }   
+                ],
+                "emoji" : "<:Nex:1454631111245430826>"
+                    }                    
+]
