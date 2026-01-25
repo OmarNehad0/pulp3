@@ -161,15 +161,12 @@ client.on("interactionCreate", async (interaction) => {
 
       for (const chunk of chunks) {
         await interaction.followUp({
-          content: "Choose a boss:",
           components: chunk
         });
       }
     }
   }
-
   if (interaction.isStringSelectMenu()) {
-
     const [jsonFile, bossName] = interaction.values[0].split("|");
 
     const modal = new ModalBuilder()
@@ -188,17 +185,13 @@ client.on("interactionCreate", async (interaction) => {
     // 🔥 هنا الحل اللي انت عايزه
     await interaction.showModal(modal);
 
-    // Edit نفس الرسالة بنفس الـ components (مفيش أي تغيير ظاهر)
-    // وده بيعمل reset للـ selection
     try {
       await interaction.message.edit({
         components: interaction.message.components
       });
     } catch (err) {
-      // ignore
     }
   }
-
   if (interaction.isModalSubmit()) {
     const [jsonFile, bossName] = interaction.customId.split(":")[1].split("|");
     const killCount = parseInt(interaction.fields.getTextInputValue("kill_count"));
