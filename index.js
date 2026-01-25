@@ -12,7 +12,6 @@ const TOKEN = process.env.TOKEN;
 const CLIENT_ID = process.env.CLIENT_ID;
 const GUILD_ID = process.env.GUILD_ID;
 const LOG_CHANNEL_ID = "1433919895875092593";
-
 const JSON_FILES = [
   "MegaScales.json",
   "Chambers Of Xeric.json",
@@ -25,7 +24,11 @@ const JSON_FILES = [
   "Wilderness Bosses.json",
   "Other Bosses.json",
   "Slayer Bosses.json",
-  "High-Tier Bosses.json"
+  "High-Tier Bosses.json",
+  "minigames.json",
+  "skills.json",
+  "diaries.json",
+  "ironman shop.json"
 ];
 
 const EMOJI_MAP = {
@@ -40,7 +43,11 @@ const EMOJI_MAP = {
   "Other Bosses.json": "🦍 | ",
   "Slayer Bosses.json": "🦍 | ",
   "MegaScales.json": "🦄 | ",
-  "High-Tier Bosses.json": "🏹 | "
+  "High-Tier Bosses.json": "🏹 | ",
+  "minigames.json": "🎲",
+  "skills.json": "🏹",
+  "diaries.json": "📘",
+  "ironman shop.json": "🏪"
 };
 
 let discountPercent = 0;
@@ -244,19 +251,7 @@ client.on("interactionCreate", async (interaction) => {
   }
 });
 
-const JSON_FILES = [
-  "minigames.json",
-  "skills.json",
-  "diaries.json",
-  "ironman shop.json"
-];
 
-const EMOJI_MAP = {
-  "minigames.json": "🎲",
-  "skills.json": "🏹",
-  "diaries.json": "📘",
-  "ironman shop.json": "🏪"
-};
 
 const THUMBNAIL_URL =
   "https://images-ext-1.discordapp.net/external/JFwyBBHkv4XzTImBuTamjeJxJB7OmiaEk-YDO5yf5YA/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/1091155661183799366/a_7c61dbfa69b37d9cc8f43b93f87f57d7.gif";
