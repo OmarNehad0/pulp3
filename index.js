@@ -1,4 +1,5 @@
 const {Client,GatewayIntentBits,Partials,Routes,ActionRowBuilder,StringSelectMenuBuilder,ModalBuilder,TextInputBuilder,TextInputStyle,EmbedBuilder} = require("discord.js");
+
 const { REST } = require("@discordjs/rest");
 const fs = require("fs");
 
@@ -109,6 +110,24 @@ function buildRowsForFiles(files) {
   return rows;
 }
 
+// --- SEND MENUS FUNCTION ---
+async function sendMenus(channel, ephemeral = true) {
+  const allRows = buildRowsForFiles(JSON_FILES);
+  const chunks = [];
+
+  for (let i = 0; i < allRows.length; i += 5) {
+    chunks.push(allRows.slice(i, i + 5));
+  }
+
+  for (const chunk of chunks) {
+    await channel.send({
+      content: "Choose a boss:",
+      components: chunk,
+      ephemeral: ephemeral
+    });
+  }
+}
+
 client.on("ready", async () => {
   console.log(`Logged in as ${client.user.tag}`);
 
@@ -150,22 +169,15 @@ client.on("interactionCreate", async (interaction) => {
         return interaction.reply({ content: "❌ You don’t have permission.", flags: 64 });
       }
 
-      await interaction.reply({ content: "Starting...", flags: 64 });
+      // ⚠️ NO REPLY
+      await interaction.deferReply({ ephemeral: true });
+      await interaction.deleteReply(); // <-- hides the initial reply
 
-      const allRows = buildRowsForFiles(JSON_FILES);
-      const chunks = [];
-
-      for (let i = 0; i < allRows.length; i += 5) {
-        chunks.push(allRows.slice(i, i + 5));
-      }
-
-      for (const chunk of chunks) {
-        await interaction.followUp({
-          components: chunk
-        });
-      }
+      // send menus (ephemeral)
+      await sendMenus(interaction.channel, true);
     }
   }
+
   if (interaction.isStringSelectMenu()) {
     const [jsonFile, bossName] = interaction.values[0].split("|");
 
@@ -181,14 +193,10 @@ client.on("interactionCreate", async (interaction) => {
 
     const row = new ActionRowBuilder().addComponents(killInput);
     modal.addComponents(row);
-  
-    await interaction.showModal(modal);
 
-    // 🔥 THIS IS THE RESET
-    await interaction.update({
-      components: interaction.message.components
-    });
+    await interaction.showModal(modal);
   } 
+
   if (interaction.isModalSubmit()) {
     const [jsonFile, bossName] = interaction.customId.split(":")[1].split("|");
     const killCount = parseInt(interaction.fields.getTextInputValue("kill_count"));
@@ -230,7 +238,11 @@ client.on("interactionCreate", async (interaction) => {
     }
 
     await interaction.reply({ embeds: [embed], flags: 64 });
+
+    // 🔥 SEND NEW MENUS (RESET)
+    await sendMenus(interaction.channel, true);
   }
 });
 
 client.login(TOKEN);
+
