@@ -181,17 +181,14 @@ client.on("interactionCreate", async (interaction) => {
 
     const row = new ActionRowBuilder().addComponents(killInput);
     modal.addComponents(row);
-
-    // 🔥 هنا الحل اللي انت عايزه
+  
     await interaction.showModal(modal);
 
-    try {
-      await interaction.message.edit({
-        components: interaction.message.components
-      });
-    } catch (err) {
-    }
-  }
+    // 🔥 THIS IS THE RESET
+    await interaction.update({
+      components: interaction.message.components
+    });
+  } 
   if (interaction.isModalSubmit()) {
     const [jsonFile, bossName] = interaction.customId.split(":")[1].split("|");
     const killCount = parseInt(interaction.fields.getTextInputValue("kill_count"));
