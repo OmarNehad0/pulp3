@@ -1,0 +1,145 @@
+[
+  {
+        "name": "Araxxor",
+        "aliases": ["araxxor","arax"],
+        "caption": "- You keep all loot.\n- Prices may vary depending on Stats, Gear & Supplies.\n- Prices below are per kill assuming Max gear, Stats & Cox Prayer.",
+        "items": [
+            {
+                "name": "Araxxor",
+                "price": 0.23,
+                "image" : "https://oldschool.runescape.wiki/images/Araxxor.png?35d2e"
+            }    ],
+                "emoji" : "<:Araxxor:1464301496135975200>"
+     },
+    {
+      "name": "Abyssal Sire",
+      "aliases": [
+        "sire"
+      ],
+      "caption": "- You keep all loot.\n- Prices may vary depending on Stats, Gear & Supplies.\n- Prices below are per kill assuming Max gear, Stats & Cox Prayer.",
+      "items": [
+        {
+          "name": "Abyssal Sire",
+          "price": 0.16,
+          "image" : "https://oldschool.runescape.wiki/images/Abyssal_Sire.png?d2205"
+        }],
+          "emoji" : "<:AbyssalSire:1464301669847138355>"
+    },
+{
+      "name": "Alchemical Hydra",
+      "aliases": [
+        "hydra"
+      ],
+      "caption": "- You keep all loot.\n- Prices may vary depending on Stats, Gear & Supplies.\n- Prices below are per kill assuming Max gear, Stats & Cox Prayer.",
+      "items": [
+        {
+          "name": "Alchemical Hydra - Twisted Bow",
+          "price": 0.18,
+          "image" : "https://oldschool.runescape.wiki/images/Alchemical_Hydra_%28electric%29.png?925dd"
+        },       
+        {
+          "name": "Alchemical Hydra - Bowfa or BP(D Darts)",
+          "price": 0.20,
+          "image" : "https://oldschool.runescape.wiki/images/Alchemical_Hydra_%28electric%29.png?925dd"
+        }
+        ],
+          "emoji" : "<:AlchemicalHydra:1464301612624248895>"
+ },
+ {
+      "name": "Basilisk Knight",
+      "aliases": [
+        "basilisk"
+      ],
+      "caption": "- You keep all loot.\n- Prices may vary depending on Stats, Gear & Supplies.\n- Prices below are per kill assuming Max gear, Stats & Cox Prayer.",
+      "items": [
+        {
+          "name": "Basilisk Knight",
+          "price": 0.04,
+          "image" : "https://oldschool.runescape.wiki/images/Basilisk_Knight.png?a21ef"
+        }],
+          "emoji" : "<:BasiliskKnight:1464301326514262121>"
+  },
+  {
+      "name": "Cerberus",
+      "aliases": [
+        "cerb"
+      ],
+      "caption": "- You keep all loot.\n- Prices may vary depending on Stats, Gear & Supplies.\n- Prices below are per kill assuming Max gear, Stats & Cox Prayer.",
+      "items": [
+        {
+          "name": "Cerberus",
+          "price": 0.13,
+          "image" : "https://oldschool.runescape.wiki/images/Cerberus.png?47f4c"
+        }],
+          "emoji" : "<:Cerberus:1464301442872643675>"
+    },
+  {
+      "name": "Grotesque Guardians",
+      "aliases": [
+        "guard"
+      ],
+      "caption": "- You keep all loot.\n- Prices may vary depending on Stats, Gear & Supplies.\n- Prices below are per kill assuming Max gear, Stats & Cox Prayer.",
+      "items": [
+        {
+          "name": "Grotesque Guardians",
+          "price": 0.15,
+          "image" : "https://oldschool.runescape.wiki/images/Dawn.png?8b8ea"
+        } ],
+          "emoji" : "<:Dawn:1464301726226976981>"
+      },
+      {
+      "name": "Kraken",
+      "aliases": [
+        "kraken"
+      ],
+      "caption": "- You keep all loot.\n- Prices may vary depending on Stats, Gear & Supplies.\n- Prices below are per kill assuming Max gear, Stats & Cox Prayer.",
+      "items": [
+        {
+          "name": "Kraken",
+          "price": 0.045,
+          "image" : "https://oldschool.runescape.wiki/images/Kraken.png?a4955"
+        } ],
+          "emoji" : "<:Kraken:1464301392565895342>"
+       },
+      {
+      "name": "Shellbane Gryphon",
+      "aliases": [
+        "gryphon"
+      ],
+      "caption": "- You keep all loot.\n- Prices may vary depending on Stats, Gear & Supplies.\n- Prices below are per kill assuming Max gear, Stats & Cox Prayer.",
+      "items": [
+        {
+          "name": "Shellbane Gryphon",
+          "price": 0.085,
+          "image" : "https://oldschool.runescape.wiki/images/Shellbane_gryphon.png?bc76e"
+        } ],
+          "emoji" : "<:Shellbanegryphon:1464301255470878965>"
+       },
+    {
+      "name": "Skotizo W/ Dark Totems",
+      "aliases": [
+        "skotizo"
+      ],
+      "caption": "- You keep all loot.\n- Prices may vary depending on Stats, Gear & Supplies.\n- Prices below are per kill assuming Max gear, Stats & Cox Prayer.",
+      "items": [
+        {
+          "name": "Skotizo",
+          "price": 0.12,
+          "image" : "https://oldschool.runescape.wiki/images/Skotizo.png?dc8b8"
+        } ],
+          "emoji" : "<:Skotizo:1464301780337954971>"
+       },
+   {
+      "name": "Thermonuclear Smoke Devil",
+      "aliases": [
+        "thermy"
+      ],
+      "caption": "- You keep all loot.\n- Prices may vary depending on Stats, Gear & Supplies.\n- Prices below are per kill assuming Max gear, Stats & Cox Prayer.",
+      "items": [
+        {
+          "name": "Thermonuclear Smoke Devil W/ Max Pool",
+          "price": 0.07,
+          "image" : "https://oldschool.runescape.wiki/images/Thermonuclear_smoke_devil.png?de858"
+        }],
+          "emoji" : "<:Thermonuclearsmokedevil:1464301553132241010>"
+       }]
