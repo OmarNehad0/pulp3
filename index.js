@@ -198,20 +198,25 @@ client.on("interactionCreate", async (interaction) => {
     const row = new ActionRowBuilder().addComponents(killInput);
     modal.addComponents(row);
 
-    await interaction.deferUpdate();
+    // <-- NO deferUpdate()
     await interaction.showModal(modal);
 
-    // Delete old message & resend menus to allow reselecting same option
-    await interaction.message.delete();
-    const rows = buildRowsForFiles(JSON_FILES);
+    // delete old message to reset selection
+    try {
+      await interaction.message.delete();
+    } catch (err) {
+      // ignore if already deleted
+    }
 
-    // send again with pagination
+    // resend menus (fresh)
+    const rows = buildRowsForFiles(JSON_FILES);
     for (let i = 0; i < rows.length; i += 5) {
       const chunk = rows.slice(i, i + 5);
-      await interaction.channel.send({ content: "Choose a boss:", components: chunk });
+      await interaction.channel.send({
+        components: chunk
+      });
     }
   }
-
   if (interaction.isModalSubmit()) {
     const [jsonFile, bossName] = interaction.customId.split(":")[1].split("|");
     const killCount = parseInt(interaction.fields.getTextInputValue("kill_count"));
