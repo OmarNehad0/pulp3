@@ -1,0 +1,57 @@
+[
+    {
+      "name": "Gauntlet",
+      "aliases": [
+        "gauntlet"
+      ],
+      "caption": "- Prices are with All Prayer Unlocked.\n- +5% for each prayer missing [Piety,Rigour,Augury]",
+      "items": [
+        {
+          "name": "Normal  85+",
+          "price": 0.34,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Youngllef_%28follower%29.png/280px-Youngllef_%28follower%29.png?fc90e"
+        }
+      ],
+    "emoji" : "<:Crystalline_Hunllef:1435707424303480872>"
+    },
+    {
+      "name": "Corrupted Gauntlet",
+      "aliases": [
+        "cg"
+      ],
+      "caption": "- Prices are with All Prayer Unlocked.\n- +5% for each prayer missing [Piety,Rigour,Augury].\n- +10% If below 80 Defence.",
+      "items": [
+        {
+          "name": "99 Stats",
+          "price": 0.54,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Corrupted_Youngllef.png/1024px-Corrupted_Youngllef.png?fc90e"
+        },
+        {
+          "name": "95+ Stats",
+          "price": 0.58,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Corrupted_Youngllef.png/1024px-Corrupted_Youngllef.png?fc90e"
+        },
+        {
+          "name": "90+ Stats",
+          "price": 0.61,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Corrupted_Youngllef.png/1024px-Corrupted_Youngllef.png?fc90e"
+        },
+        {
+          "name": "85+ Stats",
+          "price": 0.68,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Corrupted_Youngllef.png/1024px-Corrupted_Youngllef.png?fc90e"
+        },
+        {
+          "name": "80+ Stats",
+          "price": 0.72,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Corrupted_Youngllef.png/1024px-Corrupted_Youngllef.png?fc90e"
+        },
+        {
+          "name": "75+ Stats",
+          "price": 0.9,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Corrupted_Youngllef.png/1024px-Corrupted_Youngllef.png?fc90e"
+        }],
+     "emoji" : "<:Corrupted_Hunllef:1434724608094765157>"
+    }
+     
+  ]
