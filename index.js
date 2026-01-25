@@ -1,4 +1,5 @@
-const { Client, GatewayIntentBits, Partials, Routes, ActionRowBuilder, SelectMenuBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, ButtonBuilder, ButtonStyle, EmbedBuilder, PermissionFlagsBits } = require("discord.js");
+const { Client, GatewayIntentBits, Partials, Routes,ActionRowBuilder, SelectMenuBuilder, StringSelectMenuBuilder,ModalBuilder, TextInputBuilder, TextInputStyle,ButtonBuilder, ButtonStyle, EmbedBuilder, PermissionFlagsBits} = require("discord.js");
+
 const { REST } = require("@discordjs/rest");
 const fs = require("fs");
 
@@ -254,7 +255,7 @@ client.on("interactionCreate", async (interaction) => {
             const file = comp.customId.split(":")[1];
             const bosses = loadBosses(file);
 
-            return new SelectMenuBuilder()
+            return new StringSelectMenuBuilder()
               .setCustomId(comp.customId)
               .setPlaceholder(`${EMOJI_MAP[file] || "🔨"}${file.replace(".json", "")}`)
               .addOptions(bosses.map(b => ({
