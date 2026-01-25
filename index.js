@@ -1,4 +1,16 @@
-const { Client, GatewayIntentBits, Partials, Routes, ActionRowBuilder, StringSelectMenuBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, ButtonBuilder, ButtonStyle, EmbedBuilder } = require("discord.js");
+const {
+  Client,
+  GatewayIntentBits,
+  Partials,
+  Routes,
+  ActionRowBuilder,
+  StringSelectMenuBuilder,
+  ModalBuilder,
+  TextInputBuilder,
+  TextInputStyle,
+  EmbedBuilder
+} = require("discord.js");
+
 const { REST } = require("@discordjs/rest");
 const fs = require("fs");
 
@@ -86,33 +98,28 @@ async function logInteraction(user, bossName, jsonFile, killCount) {
 
 function buildRows() {
   const rows = [];
-  const chunkSize = 3;
 
-  for (let i = 0; i < JSON_FILES.length; i += chunkSize) {
-    const chunk = JSON_FILES.slice(i, i + chunkSize);
-    const row = new ActionRowBuilder();
+  // IMPORTANT: Each row must contain ONLY ONE select menu
+  // Otherwise Discord will throw COMPONENT_LAYOUT_WIDTH_EXCEEDED
+  JSON_FILES.forEach(file => {
+    const bosses = loadBosses(file);
+    if (!bosses.length) return;
 
-    chunk.forEach(file => {
-      const bosses = loadBosses(file);
-      if (!bosses.length) return;
+    const options = bosses.map(b => ({
+      label: b.name,
+      value: `${file}|${b.name}`,
+      description: `Boss ${b.name}`,
+      emoji: b.emoji || "🔨"
+    }));
 
-      const options = bosses.map(b => ({
-        label: b.name,
-        value: `${file}|${b.name}`,
-        description: `Boss ${b.name}`,
-        emoji: b.emoji || "🔨"
-      }));
+    const menu = new StringSelectMenuBuilder()
+      .setCustomId(`boss_select:${file}`)
+      .setPlaceholder(`${EMOJI_MAP[file] || "🔨"}${file.replace(".json", "")}`)
+      .addOptions(options);
 
-      const menu = new StringSelectMenuBuilder()
-        .setCustomId(`boss_select:${file}`)
-        .setPlaceholder(`${EMOJI_MAP[file] || "🔨"}${file.replace(".json", "")}`)
-        .addOptions(options);
-
-      row.addComponents(menu);
-    });
-
+    const row = new ActionRowBuilder().addComponents(menu);
     rows.push(row);
-  }
+  });
 
   return rows;
 }
@@ -158,11 +165,8 @@ client.on("interactionCreate", async (interaction) => {
         return interaction.reply({ content: "❌ You don’t have permission.", flags: 64 });
       }
 
-      // **DO NOT show reply**
-      await interaction.reply({ content: "Starting...", ephemeral: true });
-      await interaction.deleteReply();
+      await interaction.reply({ content: "Starting...", flags: 64 });
 
-      // Send dropdowns
       const rows = buildRows();
       await interaction.followUp({ content: "Choose a boss:", components: rows });
     }
@@ -185,11 +189,10 @@ client.on("interactionCreate", async (interaction) => {
     const row = new ActionRowBuilder().addComponents(killInput);
     modal.addComponents(row);
 
-    // ❌ No edit
     await interaction.deferUpdate();
     await interaction.showModal(modal);
 
-    // ✅ delete old message and resend new menus (so selection resets)
+    // DELETE old message & resend menu to allow reselecting same option
     await interaction.message.delete();
     const rows = buildRows();
     await interaction.channel.send({ content: "Choose a boss:", components: rows });
@@ -238,6 +241,9 @@ client.on("interactionCreate", async (interaction) => {
     await interaction.reply({ embeds: [embed], flags: 64 });
   }
 });
+
+client.login(TOKEN);
+
 
 client.login(TOKEN);
 
