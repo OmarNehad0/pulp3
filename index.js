@@ -109,7 +109,7 @@ function buildRowsForFiles(files) {
   return rows;
 }
 
-async function sendMenus(interaction, isReset = false) {
+async function sendMenus(interaction) {
   const allRows = buildRowsForFiles(JSON_FILES);
   const chunks = [];
 
@@ -120,19 +120,16 @@ async function sendMenus(interaction, isReset = false) {
   // FIRST message = update interaction
   const first = chunks[0];
   await interaction.update({
-    content: "Choose a boss:",
     components: first,
   });
 
   // FOLLOW UP for remaining chunks
   for (let i = 1; i < chunks.length; i++) {
     await interaction.followUp({
-      content: "Choose a boss:",
       components: chunks[i],
     });
   }
 }
-
 
 client.on("ready", async () => {
   console.log(`Logged in as ${client.user.tag}`);
@@ -166,15 +163,15 @@ client.on("interactionCreate", async (interaction) => {
 
     if (interaction.commandName === "pvm_discount") {
       discountPercent = interaction.options.getInteger("percent");
-      await interaction.reply({ content: `✅ Discount set to **${discountPercent}%**`, ephemeral: true });
+      await interaction.reply({ content: `✅ Discount set to **${discountPercent}%**`, flags: 64 });
     }
 
     if (interaction.commandName === "start") {
-
       if (!hasAllowedRole(interaction.member)) {
-        return interaction.reply({ content: "❌ You don’t have permission.", ephemeral: true });
+        return interaction.reply({ content: "❌ You don’t have permission.", flags: 64 });
       }
-      await sendMenus(interaction, true);
+
+      await sendMenus(interaction);
     }
   }
 
@@ -237,10 +234,14 @@ client.on("interactionCreate", async (interaction) => {
       embed.setThumbnail(boss.items[0].image);
     }
 
-    // Reply once with result
     await interaction.reply({ embeds: [embed], flags: 64 });
+
+    // RESET menus
     await sendMenus(interaction);
   }
+});
+
 client.login(TOKEN);
+
 
 
