@@ -1,4 +1,4 @@
-const {Client,GatewayIntentBits,Partials,Routes,ActionRowBuilder,StringSelectMenuBuilder,ModalBuilder,TextInputBuilder,TextInputStyle,EmbedBuilder} = require("discord.js");
+const {Client,GatewayIntentBits,REST,Partials,Routes,ActionRowBuilder,StringSelectMenuBuilder,ModalBuilder,TextInputBuilder,TextInputStyle,EmbedBuilder,ButtonBuilder,ButtonStyle,} = require("discord.js");
 
 const { REST } = require("@discordjs/rest");
 const fs = require("fs");
@@ -244,5 +244,175 @@ client.on("interactionCreate", async (interaction) => {
   }
 });
 
+const JSON_FILES = [
+  "minigames.json",
+  "skills.json",
+  "diaries.json",
+  "ironman shop.json"
+];
+
+const EMOJI_MAP = {
+  "minigames.json": "🎲",
+  "skills.json": "🏹",
+  "diaries.json": "📘",
+  "ironman shop.json": "🏪"
+};
+
+const THUMBNAIL_URL =
+  "https://images-ext-1.discordapp.net/external/JFwyBBHkv4XzTImBuTamjeJxJB7OmiaEk-YDO5yf5YA/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/1091155661183799366/a_7c61dbfa69b37d9cc8f43b93f87f57d7.gif";
+const AUTHOR_ICON_URL = THUMBNAIL_URL;
+const componentStore = new WeakMap();
+
+function load_json(file_name) {
+  try {
+    const raw = fs.readFileSync(file_name, "utf-8");
+    return JSON.parse(raw);
+  } catch (err) {
+    return [];
+  }
+}
+
+function format_price(price) {
+  try {
+    price = parseFloat(price);
+    if (price === 0) return "$0.00";
+    if (price < 1) return `$${price.toFixed(6)}`.replace(/0+$/, "");
+    return `$${price.toFixed(2)}`;
+  } catch {
+    return "N/A $";
+  }
+}
+
+function is_custom_emoji(value) {
+  return /<a?:\w+:\d+>/.test(value);
+}
+
+function is_unicode_emoji(value) {
+  return value && [...value].some(ch => ch.codePointAt(0) > 10000);
+}
+
+function buildSelect(fileName, emoji) {
+  const data = load_json(fileName);
+  const categoryName = fileName.replace(".json", "").toUpperCase();
+
+  const options = data.map(item => {
+    let emojiValue = item.emoji;
+    if (emojiValue) {
+      emojiValue = String(emojiValue).trim();
+      if (!is_unicode_emoji(emojiValue) && !is_custom_emoji(emojiValue)) {
+        emojiValue = undefined;
+      }
+    }
+
+    return {
+      label: item.name,
+      value: item.name,
+      emoji: emojiValue
+    };
+  });
+
+  return new StringSelectMenuBuilder()
+    .setCustomId(`sapphire_select:${fileName}`)
+    .setPlaceholder(`${emoji} | ${categoryName}`)
+    .addOptions(options)
+    .setMinValues(1)
+    .setMaxValues(1);
+}
+
+client.on("ready", async () => {
+  console.log(`Logged in as ${client.user.tag}`);
+
+  const rest = new REST({ version: "10" }).setToken(TOKEN);
+  await rest.put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), {
+    body: [
+      {
+        name: "dropdown",
+        description: "Open the menu"
+      }
+    ]
+  });
+});
+
+client.on("interactionCreate", async (interaction) => {
+
+  if (interaction.isChatInputCommand()) {
+    if (interaction.commandName === "dropdown") {
+
+      // build view
+      const view = [];
+
+      JSON_FILES.forEach(file => {
+        const emoji = EMOJI_MAP[file] || "🔹";
+        const select = buildSelect(file, emoji);
+        view.push(new ActionRowBuilder().addComponents(select));
+      });
+
+      // buttons
+      const ticketBtn = new ButtonBuilder()
+        .setLabel("🎫 Open a ticket - Click Here")
+        .setStyle(ButtonStyle.Link)
+        .setURL("https://discord.com/channels/1433450572702285966/1433916983505715327");
+
+      const voucherBtn = new ButtonBuilder()
+        .setLabel("Our Sythe Vouches")
+        .setStyle(ButtonStyle.Link)
+        .setURL("https://www.sythe.org/threads/pulp-services-vouch-thread/");
+
+      view.push(new ActionRowBuilder().addComponents(ticketBtn, voucherBtn));
+
+      // ⭐ Send message AND store components
+      const msg = await interaction.reply({
+        content: "Choose a category:",
+        components: view,
+        fetchReply: true
+      });
+
+      // ⭐ STORE COMPONENTS IN THE MESSAGE (SAPPHIRE STYLE)
+      componentStore.set(msg, view);
+    }
+  }
+
+  if (interaction.isStringSelectMenu()) {
+
+    const fileName = interaction.customId.split(":")[1];
+    const selected = interaction.values[0];
+
+    const data = load_json(fileName);
+    const item = data.find(i => i.name === selected);
+
+    if (!item) {
+      return interaction.reply({ content: "Item not found.", ephemeral: true });
+    }
+
+    const embed = new EmbedBuilder()
+      .setTitle(item.name)
+      .setDescription(item.caption || "No description provided")
+      .setColor("Blue")
+      .setThumbnail(item.image || THUMBNAIL_URL)
+      .setAuthor({ name: "Pulp Pricing", iconURL: AUTHOR_ICON_URL })
+      .setFooter({ text: "Pulp Pricing", iconURL: AUTHOR_ICON_URL });
+
+    if (fileName === "skills.json" && item.methods) {
+      embed.addFields({
+        name: "Training Methods",
+        value: item.methods.map(m => `• **${m.title}**: ${format_price(m.gpxp)} $/XP (Req: ${m.req})`).join("\n")
+      });
+    } else if (item.items) {
+      embed.addFields({
+        name: "Available Options",
+        value: item.items.map(i => `• **${i.name}**: ${format_price(i.price || 0)}`).join("\n")
+      });
+    }
+
+    // ⭐ The reset (Sapphire style)
+    const stored = componentStore.get(interaction.message);
+    await interaction.update({
+      components: stored
+    });
+
+    // send ephemeral info
+    await interaction.followUp({ embeds: [embed], ephemeral: true });
+  }
+});
 client.login(TOKEN);
 
