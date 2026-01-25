@@ -1,5 +1,4 @@
-const {Client,GatewayIntentBits,Rest,Partials,Routes,ActionRowBuilder,StringSelectMenuBuilder,ModalBuilder,TextInputBuilder,TextInputStyle,EmbedBuilder} = require("discord.js");
-
+const {Client,GatewayIntentBits,Partials,Routes,ActionRowBuilder,StringSelectMenuBuilder,ModalBuilder,TextInputBuilder,TextInputStyle,EmbedBuilder} = require("discord.js");
 const { REST } = require("@discordjs/rest");
 const fs = require("fs");
 
@@ -153,7 +152,6 @@ client.on("interactionCreate", async (interaction) => {
 
       await interaction.reply({ content: "Starting...", flags: 64 });
 
-      // PAGINATION: 5 rows per message
       const allRows = buildRowsForFiles(JSON_FILES);
       const chunks = [];
 
@@ -187,25 +185,20 @@ client.on("interactionCreate", async (interaction) => {
     const row = new ActionRowBuilder().addComponents(killInput);
     modal.addComponents(row);
 
-    // <-- NO deferUpdate()
+    // 🔥 هنا الحل اللي انت عايزه
     await interaction.showModal(modal);
 
-    // delete old message to reset selection
+    // Edit نفس الرسالة بنفس الـ components (مفيش أي تغيير ظاهر)
+    // وده بيعمل reset للـ selection
     try {
-      await interaction.message.delete();
-    } catch (err) {
-      // ignore if already deleted
-    }
-
-    // resend menus (fresh)
-    const rows = buildRowsForFiles(JSON_FILES);
-    for (let i = 0; i < rows.length; i += 5) {
-      const chunk = rows.slice(i, i + 5);
-      await interaction.channel.send({
-        components: chunk
+      await interaction.message.edit({
+        components: interaction.message.components
       });
+    } catch (err) {
+      // ignore
     }
   }
+
   if (interaction.isModalSubmit()) {
     const [jsonFile, bossName] = interaction.customId.split(":")[1].split("|");
     const killCount = parseInt(interaction.fields.getTextInputValue("kill_count"));
