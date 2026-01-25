@@ -1,0 +1,369 @@
+[ 
+     {
+      "name": "Barrows Chest",
+      "aliases": [
+        "barrows"
+      ],
+      "caption": "- You keep all loot.\n- Prices may vary depending on Stats, Gear & Supplies.\n- Prices below are per kill assuming Max gear, Stats & Cox Prayer.\n- +30% if No Teleport.",
+      "items": [
+        {
+          "name": "Barrows Chest",
+          "price": 0.22,
+          "image" : "https://oldschool.runescape.wiki/images/Dharok_the_Wretched.png?33092"
+        }],
+          "emoji" : "<:Dharok:1464322320318333033>"
+     },
+     {
+      "name": "Corporeal Beast",
+      "aliases": [
+        "corp"
+      ],
+      "caption": "- You keep all loot.\n- Prices may vary depending on Stats, Gear & Supplies.\n- Prices below are per kill assuming Max gear, Stats & Cox Prayer.\n- DWH, BGS & Archlight or Emberlight are Required.",
+      "items": [
+        {
+          "name": "Corporeal Beast - Solo",
+          "price": 0.8,
+          "image" : "https://oldschool.runescape.wiki/images/Corporeal_Beast.png?52ebb"
+        }],
+          "emoji" : "<:CorporealBeast:1464321993640902717>"
+    },
+     {
+      "name": "Dagganoth Kings",
+      "aliases": [
+        "dks"
+      ],
+      "caption": "- You keep all loot.\n- Prices may vary depending on Stats, Gear & Supplies.\n- Prices below are per kill assuming Max gear, Stats & Cox Prayer.",
+      "items": [
+       {
+          "name": "Dagganoth Kings - Rex Only",
+          "price": 0.225,
+          "image" : "https://oldschool.runescape.wiki/images/Dagannoth_Rex.png?a99a9"
+        },
+        {
+          "name": "Dagganoth Kings - Full rotation",
+          "price": 0.42,
+          "image" : "https://oldschool.runescape.wiki/images/Dagannoth_Prime.png?945b1"
+        }],
+          "emoji" : "<:DagannothPrime:1464321852213170273>"
+    },{
+      "name": "Demonic Gorillas",
+      "aliases": [
+        "demonic"
+      ],
+      "caption": "- You keep all loot.\n- Prices may vary depending on Stats, Gear & Supplies.\n- Prices below are per kill assuming Max gear, Stats & Cox Prayer.",
+      "items": [
+        {
+          "name": "Demonic Gorillas - On Task",
+          "price": 0.12,
+          "image" : "https://oldschool.runescape.wiki/images/Demonic_gorilla_%281%29.png?5f457"
+        },
+        {
+          "name": "Demonic Gorillas - Off Task",
+          "price": 0.15,
+          "image" : "https://oldschool.runescape.wiki/images/Demonic_gorilla_%281%29.png?5f457"
+        }
+               ],
+          "emoji" : "<:Demonicgorilla:1464321618829639823>"
+      },
+     {
+      "name": "Giant Mole",
+      "aliases": [
+        "mole"
+      ],
+      "caption": "- You keep all loot.\n- Prices may vary depending on Stats, Gear & Supplies.\n- Prices below are per kill assuming Max gear, Stats & Cox Prayer.\n- Hard Falador Diary is Required.",
+      "items": [
+        {
+          "name": "Giant Mole - W/Falador Hard Diary",
+          "price": 0.07,
+          "image" : "https://oldschool.runescape.wiki/images/Giant_Mole.png?3f58a"
+        },
+        {
+          "name": "Giant Mole - W/O Falador Hard Diary",
+          "price": 0.2,
+          "image" : "https://oldschool.runescape.wiki/images/Giant_Mole.png?3f58a"
+        }
+               ],
+          "emoji" : "<:GiantMole:1464321453997691013>"
+      },     
+      {
+      "name": "Kalphite Queen",
+      "aliases": [
+        "kq"
+      ],
+      "caption": "- You keep all loot.\n- Prices may vary depending on Stats, Gear & Supplies.\n- Prices below are per kill assuming Max gear, Stats & Cox Prayer.",
+      "items": [
+        {
+          "name": "Kalphite Queen - W/Desert Elite Diary",
+          "price": 0.25,
+          "image" : "https://oldschool.runescape.wiki/images/Kalphite_Queen.png?a4955"
+        },
+        {
+          "name": "Kalphite Queen - W/O Desert Elite Diary",
+          "price": 0.33,
+          "image" : "https://oldschool.runescape.wiki/images/Kalphite_Queen.png?a4955"
+        }
+               ],
+          "emoji" : "<:KalphiteQueen:1464321309784674428>"
+      }, 
+        {
+      "name": "Sarachnis",
+      "aliases": [
+        "sarachnis"
+      ],
+      "caption": "- You keep all loot.\n- Prices may vary depending on Stats, Gear & Supplies.\n- Prices below are per kill assuming Max gear, Stats & Cox Prayer.",
+      "items": [
+        {
+          "name": "Sarachnis",
+          "price": 0.12,
+          "image" : "https://oldschool.runescape.wiki/images/Sarachnis.png?8f040"
+        }
+               ],
+          "emoji" : "<:Sarachnis:1464321136618897583>"
+        },
+       {
+      "name": "Lizardmen Shamans",
+      "aliases": [
+        "shamans"
+      ],
+      "caption": "- You keep all loot.\n- Prices may vary depending on Stats, Gear & Supplies.\n- Prices below are per kill assuming Max gear, Stats & Cox Prayer.\n- +30% if No Cannon.",
+      "items": [
+        {
+          "name":"Shamans - W/ BP or Bowfa + Cannon",
+          "price": 0.0215,
+          "image" : "https://oldschool.runescape.wiki/images/Lizardman_shaman_%28Lizardman_Temple%29.png?dea7c"
+        },
+        {
+          "name": "Shamans - W/ MSB + Cannon",
+          "price": 0.032,
+          "image" : "https://oldschool.runescape.wiki/images/Lizardman_shaman_%28Lizardman_Temple%29.png?dea7c"
+        },
+        {
+          "name": "Shaman Alting - Per Hour",
+          "price": 2.2,
+          "image" : "https://oldschool.runescape.wiki/images/Lizardman_shaman_%28Lizardman_Temple%29.png?dea7c"
+        }
+               ],
+          "emoji" : "<:Lizardmanshaman:1464321005429325884>"
+        },
+        {
+      "name": "Amoxliatl",
+      "aliases": [
+        "amox"
+      ],
+      "caption": "- You keep all loot.\n- Prices may vary depending on Stats, Gear & Supplies.\n- Prices below are per kill assuming Max gear, Stats & Cox Prayer.",
+      "items": [
+        {
+          "name": "Amoxliatl",
+          "price": 0.085,
+          "image" : "https://oldschool.runescape.wiki/images/Amoxliatl.png?01b12"
+        }
+               ],
+          "emoji" : "<:Amoxliatl:1464320481686458368>"
+       },   
+        {
+      "name": "Vorkath",
+      "aliases": [
+        "vorkath"
+      ],
+      "caption": "- You keep all loot.\n- Prices may vary depending on Stats, Gear & Supplies.\n- Prices below are per kill assuming Max gear, Stats & Cox Prayer.\n- +10% if No Rigour.",
+      "items": [
+        {
+          "name": "Vorkath - W/DHCB or Lance",
+          "price": 0.19,
+          "image" : "https://oldschool.runescape.wiki/images/Vorkath.png?1ce3f"
+        },
+        {
+          "name": "Vorkath - W/O DHCB or Lance",
+          "price": 0.24,
+          "image" : "https://oldschool.runescape.wiki/images/Vorkath.png?1ce3f"
+        }
+               ],
+          "emoji" : "<:Vorkath:1437331422615568475>"
+       },
+       {
+      "name": "Phantom Muspah",
+      "aliases": [
+        "phantom"
+      ],
+      "caption": "- You keep all loot.\n- Prices may vary depending on Stats, Gear & Supplies.\n- Prices below are per kill assuming Max gear, Stats & Cox Prayer.",
+      "items": [
+        {
+          "name": "Phantom Muspah - Teleport Unlocked",
+          "price": 0.23,
+          "image" : "https://oldschool.runescape.wiki/images/Phantom_Muspah_%28melee%29.png?4b33c"
+        },
+        {
+          "name": "Phantom Muspah - No Teleport",
+          "price": 0.27,
+          "image" : "https://oldschool.runescape.wiki/images/Phantom_Muspah_%28melee%29.png?4b33c"
+        }
+               ],
+          "emoji" : "<:PhantomMuspah:1464320081910698208>"
+       },
+       {
+      "name": "The Hueycoatl",
+      "aliases": [
+        "huey"
+      ],
+      "caption": "- You keep all loot.\n- Prices may vary depending on Stats, Gear & Supplies.\n- Prices below are per kill assuming Max gear, Stats & Cox Prayer.",
+      "items": [
+        {
+          "name": "The Hueycoatl - Solo",
+          "price": 1.1,
+          "image" : "https://oldschool.runescape.wiki/images/The_Hueycoatl.png?7b216"
+        },
+        {
+          "name": "The Hueycoatl - Duo",
+          "price": 0.7,
+          "image" : "https://oldschool.runescape.wiki/images/The_Hueycoatl.png?7b216"
+        },
+        {
+          "name": "The Hueycoatl - Teams",
+          "price": 0.3,
+          "image" : "https://oldschool.runescape.wiki/images/The_Hueycoatl.png?7b216"
+        }
+               ],
+          "emoji" : "<:The_Hueycoatl:1435714067162726490>"
+       },
+       {
+      "name": "Scurrius",
+      "aliases": [
+        "scurrius"
+      ],
+      "caption": "- You keep all loot.\n- Prices may vary depending on Stats, Gear & Supplies.\n- Prices below are per kill assuming Max gear, Stats & Cox Prayer.",
+      "items": [
+        {
+          "name": "Scurrius",
+          "price": 0.12,
+          "image" : "https://oldschool.runescape.wiki/images/Scurrius.png?e66a5"
+        }
+               ],
+          "emoji" : "<:Scurrius:1464318919421722686>"
+       },
+       {
+      "name": "Tormented Demon",
+      "aliases": [
+        "tormented"
+      ],
+      "caption": "- You keep all loot.\n- Prices may vary depending on Stats, Gear & Supplies.\n- Prices below are per kill assuming Max gear, Stats & Cox Prayer.",
+      "items": [
+        {
+          "name": "Tormented Demon - On Task",
+          "price": 0.16,
+          "image" : "https://oldschool.runescape.wiki/images/Tormented_Demon_%282%29.png?6c099"
+        },
+        {
+          "name": "Tormented Demon - Off Task",
+          "price": 0.19,
+          "image" : "https://oldschool.runescape.wiki/images/Tormented_Demon_%282%29.png?6c099"
+        }
+               ],
+          "emoji" : "<:TormentedDemon:1464319153702961162>"
+       },
+       {
+      "name": "Deranged Archaeologist",
+      "aliases": [
+        "deranged"
+      ],
+      "caption": "- You keep all loot.\n- Prices may vary depending on Stats, Gear & Supplies.\n- Prices below are per kill assuming Max gear, Stats & Cox Prayer.",
+      "items": [
+        {
+          "name": "Deranged Archaeologist",
+          "price": 0.07,
+          "image" : "https://oldschool.runescape.wiki/images/Deranged_archaeologist.png?32c7e"
+        }
+               ],
+          "emoji" : "<:Derangedarchaeologist:1464319624332972219>"
+       },
+       {
+      "name": "Royal Titans",
+      "aliases": [
+        "royal"
+      ],
+      "caption": "- You keep all loot.\n- Prices may vary depending on Stats, Gear & Supplies.\n- Prices below are per kill assuming Max gear, Stats & Cox Prayer.\n- +20% if No Teleport.",
+      "items": [
+        {
+          "name": "Rotal Titans - Solo",
+          "price": 0.35,
+          "image" : "https://oldschool.runescape.wiki/images/Branda_the_Fire_Queen.png?0687c"
+        },
+        {
+          "name": "Royal Titans - Duo",
+          "price": 0.23,
+          "image" : "https://oldschool.runescape.wiki/images/Branda_the_Fire_Queen.png?0687c"
+        }
+               ],
+          "emoji" : "<:BrandatheFireQueen:1464319478559932457>"
+       },
+       {
+      "name": "Zalcano",
+      "aliases": [
+        "zalcano"
+      ],
+      "caption": "- You keep all loot.\n- Prices may vary depending on Stats, Gear & Supplies.\n- Prices below are per kill assuming Max gear, Stats & Cox Prayer.\n- +20% if Rune Pickaxe for Solos.",
+      "items": [
+        {
+          "name": "Zalcano - Solo (D Pickaxe)",
+          "price": 0.85,
+          "image" : "https://oldschool.runescape.wiki/images/Zalcano.png?6244d"
+        },
+        {
+          "name": "Zalcano - (4-5 Teams)",
+          "price": 0.245,
+          "image" : "https://oldschool.runescape.wiki/images/Zalcano.png?6244d"
+        },
+        {
+          "name": "Zalcano - Mass (+30% if Rune Pickaxe)",
+          "price": 0.09,
+          "image" : "https://oldschool.runescape.wiki/images/Zalcano.png?6244d"
+        }
+               ],
+          "emoji" : "<:Zalcano:1464320814571716781>"
+       },
+       {
+      "name": "Lunar Chest - Moons of Peril",
+      "aliases": [
+        "lunar chest"
+      ],
+      "caption": "- You keep all loot.\n- Prices may vary depending on Stats, Gear & Supplies.\n- Prices below are per kill assuming Max gear, Stats & Cox Prayer.\n- 1kc = Full Rotation.",
+      "items": [
+        {
+          "name": "Lunar Chest - Max Gear",
+          "price": 0.35,
+          "image" : "https://oldschool.runescape.wiki/images/Blood_Moon.png?c3e72"
+        },
+        {
+          "name": "Lunar Chest - Z Axe & DDS (80+ Stats)",
+          "price": 0.7,
+          "image" : "https://oldschool.runescape.wiki/images/Blood_Moon.png?c3e72"
+        },
+        {
+          "name": "Lunar Chest - D Sci & DDS (80+ Stats)",
+          "price": 1,
+          "image" : "https://oldschool.runescape.wiki/images/Blood_Moon.png?c3e72"
+        }
+               ],
+          "emoji" : "<:BloodMoon:1464320333434589274>"
+       },
+       {
+      "name": "Zulrah",
+      "aliases": [
+        "zulrah"
+      ],
+      "caption": "- You keep all loot.\n- Prices may vary depending on Stats, Gear & Supplies.\n- Prices below are per kill assuming Max gear, Stats & Cox Prayer.\n- +15% if No Rigour.\n- +20% if No Suffering Ring.",
+      "items": [
+        {
+          "name":"Zulrah - Max Gear (Shadow / T Bow)",
+          "price": 0.15,
+          "image" : "https://oldschool.runescape.wiki/images/Zulrah_%28magma%29.png?fd984"
+        },
+        {
+          "name": "Zulrah - Bowfa & Trident",
+          "price": 0.17,
+          "image" : "https://oldschool.runescape.wiki/images/Zulrah_%28magma%29.png?fd984"
+        }
+               ],
+          "emoji" : "<:Zulrah:1464320645226823834>"
+        }
+  ]
+
