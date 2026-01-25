@@ -1,0 +1,136 @@
+[
+    {
+      "name": "Solos - Normal & Expert Modes",
+      "caption" : "- Prices Below are per KC & Logins assuming Max Gear & Stats.\n- Prices may vary depending on Gear & Stats.",
+      "aliases": [
+        "toa",
+        "tombs of amascuts"
+      ],
+      "items": [
+        {
+          "name": "TOA - 50 Invocations",
+          "price": 1.35,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Elidinis%27_Warden.png/180px-Elidinis%27_Warden.png?c9f68"
+        },
+        {
+          "name": "TOA - 150 Invocations",
+          "price": 1.7,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Elidinis%27_Warden.png/180px-Elidinis%27_Warden.png?c9f68"
+        },
+        {
+          "name": "TOA - 200 Invocations",
+          "price": 2,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Elidinis%27_Warden.png/180px-Elidinis%27_Warden.png?c9f68"
+        },
+        {
+          "name": "TOA - 250 Invocations",
+          "price": 2.7,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Elidinis%27_Warden.png/180px-Elidinis%27_Warden.png?c9f68"
+        },
+        {
+          "name": "TOA Expert - 300 Invocations",
+          "price": 3.5,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Elidinis%27_Warden.png/180px-Elidinis%27_Warden.png?c9f68"
+        },
+        {
+        "name" : "TOA Expert - 350 Invocations",
+        "price" : 5.5,
+        "image" : "https://oldschool.runescape.wiki/images/thumb/Elidinis%27_Warden.png/180px-Elidinis%27_Warden.png?c9f68"
+        },
+        {
+          "name": "TOA Expert - 400 Invocations",
+          "price": 8,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Elidinis%27_Warden.png/180px-Elidinis%27_Warden.png?c9f68"
+        },
+        {
+          "name": "425 Invocations - Elidinis' Ward Kit",
+          "price": 14.5,
+          "image" : "https://oldschool.runescape.wiki/images/Elidinis%27_ward_%28or%29_detail.png?3d649"
+        },
+        {
+          "name": "Fang Kit - 500 Invocations",
+          "price": 24,
+          "image" : "https://oldschool.runescape.wiki/images/Osmumten%27s_fang_%28or%29_detail.png?ab38b"
+        }
+      ],
+          "emoji" : "<:TOAExpertMode:1456847540044566569>"
+    },
+    {
+      "name": "Pet Transmogs",
+      "caption" : "- Prices Below are per KC & Logins assuming Max Gear & Stats.\n- Prices may vary depending on Gear & Stats.",
+      "aliases": [
+        "toapet",
+        "pettrans"
+      ],
+      "items": [
+        {
+          "name": "All Demi-boss Transmogs Pack",
+          "price": 96.5,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Tumeken%27s_Guardian_%28follower%29.png/250px-Tumeken%27s_Guardian_%28follower%29.png?7583d"
+        }],
+          "emoji" : "<:TumekensGuardian:1456853969614799064>"
+    },
+         {
+      "name": "Zebak Transmog",
+      "caption" : "- Prices Below are per KC & Logins assuming Max Gear & Stats.\n- Prices may vary depending on Gear & Stats.",
+      "aliases": [
+        "zebak",
+        "toazebak"
+      ],
+      "items": [
+        {
+          "name": "Zebak Transmog",
+          "price": 19,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Zebo_%28follower%29.png/280px-Zebo_%28follower%29.png?f874d"
+        }],
+          "emoji" : "<:Zebo:1456854878679728253>"
+         },
+        {
+      "name": "Kephri Transmog",
+      "caption" : "- Prices Below are per KC & Logins assuming Max Gear & Stats.\n- Prices may vary depending on Gear & Stats.",
+      "aliases": [
+        "kephri",
+        "toakephri"
+      ],
+      "items": [
+        {
+          "name": "Kephri Transmog",
+          "price": 20.5,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Kephriti_%28follower%29.png/250px-Kephriti_%28follower%29.png?f874d"
+        }
+      ],
+          "emoji" : "<:Kephriti:1456854933348421819>"
+    },
+    {
+      "name": "Baba Transmog",
+      "caption" : "- Prices Below are per KC & Logins assuming Max Gear & Stats.\n- Prices may vary depending on Gear & Stats.",
+      "aliases": [
+        "baba",
+        "toababa"
+      ],
+      "items": [
+        {
+          "name": "Baba Transmog",
+          "price": 19,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Babi_%28follower%29.png/280px-Babi_%28follower%29.png?bb285"
+        }
+      ],
+         "emoji" : "<:Babi:1456854815266045982>"
+    },
+    {
+      "name": "Akha Transmog",
+      "caption" : "- Prices Below are per KC & Logins assuming Max Gear & Stats.\n- Prices may vary depending on Gear & Stats.",
+      "aliases": [
+        "akha",
+        "toaakha"
+      ],
+      "items": [
+        {
+          "name": "Akha Transmog",
+          "price": 19,
+          "image" : "https://oldschool.runescape.wiki/images/thumb/Akkhito_%28follower%29.png/220px-Akkhito_%28follower%29.png?bb285"
+        }
+      ],
+         "emoji" : "<:Akkhito:1456854754075344908>"
+    }
+  ]
