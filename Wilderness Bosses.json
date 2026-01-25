@@ -1,0 +1,193 @@
+[
+    {
+        "name": "Calisto & Artio",
+        "aliases": ["artio", "calisto"],
+        "caption": "- You keep all loot.\n- Prices below are per kill assuming Max Gear & Stats.\n- Prices may vary for Ironmen accounts depending on Stats, Gear & Cox Prayer.",
+        "items": [
+            {
+                "name": "Callisto",
+                "price": 0.38,
+                "image" : "https://oldschool.runescape.wiki/images/Callisto.png?bfba7"
+           },
+           {
+                "name": "Artio W/ Craw or Webweaver",
+                "price": 0.175,
+                "image" : "https://oldschool.runescape.wiki/images/Callisto.png?bfba7"
+           },
+          {
+                "name": "Artio W/ Bowfa",
+                "price": 0.2,
+                "image" : "https://oldschool.runescape.wiki/images/Callisto.png?bfba7"}],
+                "emoji" : "<:Artio:1440567382673326272>"
+        },
+        {
+        "name": "Vet'ion & Calvar'ion",
+        "aliases": ["vet'ion","cal","calvar'ion"],
+        "caption": "- You keep all loot.\n- Prices below are per kill assuming Max Gear & Stats.\n- Prices may vary for Ironmen accounts depending on Stats, Gear & Cox Prayer.",
+        "items": [
+            {
+                "name": "Vet'ion",
+                "price": 0.35,
+                "image" : "https://oldschool.runescape.wiki/images/thumb/Calvar%27ion.png/180px-Calvar%27ion.png?6268f"
+            },
+            {
+                "name": "Calvar'ion W/ Ursine or Viggora",
+                "price": 0.12,
+                "image" : "https://oldschool.runescape.wiki/images/thumb/Calvar%27ion.png/180px-Calvar%27ion.png?6268f"
+            },
+            {
+                "name": "Calvar'ion W/ Zombie Axe / Z Hasta",
+                "price": 0.16,
+                "image" : "https://oldschool.runescape.wiki/images/thumb/Calvar%27ion.png/180px-Calvar%27ion.png?6268f"
+            }    ],
+                "emoji" : "<:Vetion:1457436332539248835>"
+     },
+    {
+        "name": "Venenatis & Spindel",
+        "aliases": ["venenatis","spindel","ven"],
+        "caption": "- You keep all loot.\n- Prices below are per kill assuming Max Gear & Stats.\n- Prices may vary for Ironmen accounts depending on Stats, Gear & Cox Prayer.",
+        "items": [
+            {
+                "name": "Venenatis",
+                "price": 0.38,
+                "image" : "https://oldschool.runescape.wiki/images/thumb/Venenatis.png/280px-Venenatis.png?13693"
+            },
+            {
+                "name": "Spindel W/ Ursine or Viggora",
+                "price": 0.15,
+                "image" : "https://oldschool.runescape.wiki/images/thumb/Venenatis.png/280px-Venenatis.png?13693"
+            },
+            {
+                "name": "Spindel W/ Zombie Axe or Z Hasta",
+                "price": 0.18,
+                "image" : "https://oldschool.runescape.wiki/images/thumb/Venenatis.png/280px-Venenatis.png?13693"
+            }    ],
+                "emoji" : "<:Venenatis:1457436377120510114>"
+     },
+     {
+        "name": "Chaos Elemental",
+        "aliases": ["chaosele","elemental"],
+        "caption": "- You keep all loot.\n- Prices below are per kill assuming Max Gear & Stats.\n- Prices may vary for Ironmen accounts depending on Stats, Gear & Cox Prayer.",
+        "items": [
+            {
+                "name": "Chaos Elemental W/ Craw or Webweaver",
+                "price": 0.1,
+                "image" : "https://oldschool.runescape.wiki/images/Chaos_Elemental.png?c170c"
+            },
+            {
+                "name": "Chaos Elemental W/ Bowfa",
+                "price": 0.12,
+                "image" : "https://oldschool.runescape.wiki/images/Chaos_Elemental.png?c170c"
+            }    ],
+                "emoji" : "<:ChaosElemental:1457436833125502976>"
+     },
+     {
+        "name": "Scorpia",
+        "aliases": ["scorpia"],
+        "caption": "- You keep all loot.\n- Prices below are per kill assuming Max Gear & Stats.\n- Prices may vary for Ironmen accounts depending on Stats, Gear & Cox Prayer.",
+        "items": [
+            {
+                "name": "Scorpia W/ Accursed Sceptre",
+                "price": 0.11,
+                "image" : "https://oldschool.runescape.wiki/images/Scorpia.png?517c9"
+            },
+            {
+                "name": "Scorpia W/ Trident",
+                "price": 0.13,
+                "image" : "https://oldschool.runescape.wiki/images/Scorpia.png?517c9"
+            }     ],
+                 "emoji" : "<:Scorpia:1457436971348787254>"
+     },
+    {
+        "name": "Chaos Fanatic",
+        "aliases": ["fanatic"],
+        "caption": "- You keep all loot.\n- Prices below are per kill assuming Max Gear & Stats.\n- Prices may vary for Ironmen accounts depending on Stats, Gear & Cox Prayer.",
+        "items": [
+            {
+                "name": "Chaos Fanatic W/ Webweaver or Craw",
+                "price": 0.07,
+                "image" : "https://oldschool.runescape.wiki/images/Chaos_Fanatic.png?8871d"
+            },
+            {
+                "name": "Chaos Fanatic W/ Bowfa",
+                "price": 0.09,
+                "image" : "https://oldschool.runescape.wiki/images/Chaos_Fanatic.png?8871d"
+            } ],
+                 "emoji" : "<:ChaosFanatic:1457436878688227484>"
+     },
+    {
+        "name": "Crazy Archaeologist",
+        "aliases": ["crazy"],
+        "caption": "- You keep all loot.\n- Prices below are per kill assuming Max Gear & Stats.\n- Prices may vary for Ironmen accounts depending on Stats, Gear & Cox Prayer.",
+        "items": [
+            {
+                "name": "Crazy Archaeologist W/ Accursed Sceptre",
+                "price": 0.062,
+                "image" : "https://oldschool.runescape.wiki/images/Crazy_archaeologist.png?3ecc9"
+            },
+            {
+                "name": "Crazy Archaeologist W/ Trident",
+                "price": 0.07,
+                "image" : "https://oldschool.runescape.wiki/images/Crazy_archaeologist.png?3ecc9"
+            }],
+                 "emoji" : "<:Crazyarchaeologist:1457437201372545156>"
+     },
+     {
+        "name": "Revenants",
+        "aliases": ["revs"],
+        "caption": "- You keep all loot.\n- Prices below are per kill assuming Max Gear & Stats.\n- Prices may vary for Ironmen accounts depending on Stats, Gear & Cox Prayer.",
+        "items": [
+            {
+                "name": "Revenant - Dragon or Knight",
+                "price": 0.1,
+                "image" : "https://oldschool.runescape.wiki/images/Revenant_dragon.png?81747"
+            },
+            {
+                "name": "Revenant Dark Beast",
+                "price": 0.075,
+                "image" : "https://oldschool.runescape.wiki/images/Revenant_dark_beast.png?81747"
+            },
+            {
+                "name": "Revenant Ork",
+                "price": 0.06,
+                "image" : "https://oldschool.runescape.wiki/images/Revenant_ork.png?937a2"
+            },
+            {
+                "name": "Revenant Demon",
+                "price": 0.05,
+                "image" : "https://oldschool.runescape.wiki/images/Revenant_demon.png?81747"
+            },
+            {
+                "name": "Revenant Hellhound",
+                "price": 0.042,
+                "image" : "https://oldschool.runescape.wiki/images/Revenant_hellhound.png?212cc"
+            },
+            {
+                "name": "Revenant Cyclops",
+                "price": 0.035,
+                "image" : "https://oldschool.runescape.wiki/images/Revenant_cyclops.png?81747"
+            } 
+        ],
+                 "emoji" : "<:Revenants:1457436279217066146>"
+     },
+     {
+        "name": "King Black Dragon",
+        "aliases": ["kbd"],
+        "caption": "- You keep all loot.\n- Prices below are per kill assuming Max Gear & Stats.\n- Prices may vary for Ironmen accounts depending on Stats, Gear & Cox Prayer.",
+        "items": [
+            {
+                "name": "KBD - W/ Dragon Hunter Items",
+                "price": 0.11,
+                "image" : "https://oldschool.runescape.wiki/images/King_Black_Dragon_%28Christmas%29.png?a4b99"
+            },
+            {
+                "name": "KBD - W/ Normal Gear",
+                "price": 0.15,
+                "image" : "https://oldschool.runescape.wiki/images/King_Black_Dragon_%28Christmas%29.png?a4b99"
+            }     ],
+                 "emoji" : "<:kbd:1457436926377332756>"
+     }
+]
+
+
+
