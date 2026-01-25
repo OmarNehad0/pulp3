@@ -96,12 +96,10 @@ async function logInteraction(user, bossName, jsonFile, killCount) {
   await channel.send({ embeds: [embed] });
 }
 
-function buildRows() {
+function buildRowsForFiles(files) {
   const rows = [];
 
-  // IMPORTANT: Each row must contain ONLY ONE select menu
-  // Otherwise Discord will throw COMPONENT_LAYOUT_WIDTH_EXCEEDED
-  JSON_FILES.forEach(file => {
+  files.forEach(file => {
     const bosses = loadBosses(file);
     if (!bosses.length) return;
 
@@ -117,8 +115,7 @@ function buildRows() {
       .setPlaceholder(`${EMOJI_MAP[file] || "🔨"}${file.replace(".json", "")}`)
       .addOptions(options);
 
-    const row = new ActionRowBuilder().addComponents(menu);
-    rows.push(row);
+    rows.push(new ActionRowBuilder().addComponents(menu));
   });
 
   return rows;
@@ -167,8 +164,20 @@ client.on("interactionCreate", async (interaction) => {
 
       await interaction.reply({ content: "Starting...", flags: 64 });
 
-      const rows = buildRows();
-      await interaction.followUp({ content: "Choose a boss:", components: rows });
+      // PAGINATION: 5 rows per message
+      const allRows = buildRowsForFiles(JSON_FILES);
+      const chunks = [];
+
+      for (let i = 0; i < allRows.length; i += 5) {
+        chunks.push(allRows.slice(i, i + 5));
+      }
+
+      for (const chunk of chunks) {
+        await interaction.followUp({
+          content: "Choose a boss:",
+          components: chunk
+        });
+      }
     }
   }
 
@@ -192,10 +201,15 @@ client.on("interactionCreate", async (interaction) => {
     await interaction.deferUpdate();
     await interaction.showModal(modal);
 
-    // DELETE old message & resend menu to allow reselecting same option
+    // Delete old message & resend menus to allow reselecting same option
     await interaction.message.delete();
-    const rows = buildRows();
-    await interaction.channel.send({ content: "Choose a boss:", components: rows });
+    const rows = buildRowsForFiles(JSON_FILES);
+
+    // send again with pagination
+    for (let i = 0; i < rows.length; i += 5) {
+      const chunk = rows.slice(i, i + 5);
+      await interaction.channel.send({ content: "Choose a boss:", components: chunk });
+    }
   }
 
   if (interaction.isModalSubmit()) {
@@ -243,7 +257,3 @@ client.on("interactionCreate", async (interaction) => {
 });
 
 client.login(TOKEN);
-
-
-client.login(TOKEN);
-
