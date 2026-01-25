@@ -126,6 +126,7 @@ client.on("interactionCreate", async (interaction) => {
     }
 
     if (interaction.commandName === "start") {
+
       if (!hasAllowedRole(interaction.member)) {
         return interaction.reply({ content: "❌ You don’t have permission.", ephemeral: true });
       }
@@ -139,27 +140,30 @@ client.on("interactionCreate", async (interaction) => {
       for (let i = 0; i < JSON_FILES.length; i += chunkSize) {
         const chunk = JSON_FILES.slice(i, i + chunkSize);
 
-        const row = new ActionRowBuilder();
+        // 🔥 NEW: each select gets its own row
+        const rows = [];
+
         chunk.forEach(file => {
           const bosses = loadBosses(file);
           if (!bosses.length) return;
 
-          const options = bosses.map(boss => ({
-            label: boss.name,
-            value: `${file}|${boss.name}`,
-            description: `Boss ${boss.name}`,
-            emoji: boss.emoji || "🔨"
+          const options = bosses.map(b => ({
+            label: b.name,
+            value: `${file}|${b.name}`,
+            description: `Boss ${b.name}`,
+            emoji: b.emoji || "🔨"
           }));
 
-          const menu = new SelectMenuBuilder()
+          const menu = new StringSelectMenuBuilder()
             .setCustomId(`boss_select:${file}`)
             .setPlaceholder(`${EMOJI_MAP[file] || "🔨"}${file.replace(".json", "")}`)
             .addOptions(options);
 
-          row.addComponents(menu);
+          const row = new ActionRowBuilder().addComponents(menu);
+          rows.push(row);
         });
 
-        await interaction.followUp({ components: [row] });
+        await interaction.followUp({ components: rows });
       }
 
       const buttonRow = new ActionRowBuilder()
@@ -168,6 +172,7 @@ client.on("interactionCreate", async (interaction) => {
             .setLabel("🎟️ Open a ticket - Click Here")
             .setStyle(ButtonStyle.Link)
             .setURL(ticketLink),
+
           new ButtonBuilder()
             .setLabel("Our Sythe Vouches")
             .setStyle(ButtonStyle.Link)
