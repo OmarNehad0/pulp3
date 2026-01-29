@@ -22,6 +22,13 @@ const TOKEN = process.env.TOKEN;
 const CLIENT_ID = process.env.CLIENT_ID;
 const GUILD_ID = process.env.GUILD_ID;
 const LOG_CHANNEL_ID = "1433919895875092593";
+function chunkArray(array, size) {
+  const chunks = [];
+  for (let i = 0; i < array.length; i += size) {
+    chunks.push(array.slice(i, i + size));
+  }
+  return chunks;
+}
 
 const JSON_FILES = [
   "MegaScales.json",
@@ -153,10 +160,22 @@ client.on("interactionCreate", async interaction => {
       return interaction.reply({ content: "❌ No permission.", flags: 64 });
     }
 
+    const rows = buildRowsForFiles(JSON_FILES);
+    const chunks = chunkArray(rows, 5);
+
+    // first message must be reply
     await interaction.reply({
-      components: buildRowsForFiles(JSON_FILES),
+      components: chunks[0],
       ephemeral: false
     });
+
+    // remaining menus = followUps
+    for (let i = 1; i < chunks.length; i++) {
+      await interaction.followUp({
+        components: chunks[i],
+        ephemeral: false
+      });
+    }
   }
 
   // ===== Discount =====
