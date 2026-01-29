@@ -190,23 +190,16 @@ client.on("interactionCreate", async interaction => {
 
     const modal = new ModalBuilder()
       .setCustomId(`killcount_modal:${jsonFile}|${bossName}`)
-      .setTitle("Kill Count");
-
-    modal.addComponents(
-      new ActionRowBuilder().addComponents(
-        new TextInputBuilder()
-          .setCustomId("kill_count")
-          .setLabel("Number of kills")
-          .setStyle(TextInputStyle.Short)
-          .setRequired(true)
-      )
-    );
-
-    // 🔥 THIS resets the placeholder
-    await interaction.update({
-      components: interaction.message.components
-    });
-
+      .setTitle("Kill Count")
+      .addComponents(
+        new ActionRowBuilder().addComponents(
+          new TextInputBuilder()
+            .setCustomId("kill_count")
+            .setLabel("Number of kills")
+            .setStyle(TextInputStyle.Short)
+            .setRequired(true)
+        )
+      );
     await interaction.showModal(modal);
   }
 
