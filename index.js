@@ -192,6 +192,7 @@ client.on("interactionCreate", async interaction => {
   }
 
   // ===== Modal Submit =====
+  // ===== Modal Submit =====
   if (interaction.isModalSubmit()) {
     const [jsonFile, bossName] = interaction.customId.split(":")[1].split("|");
     const killCount = Number(interaction.fields.getTextInputValue("kill_count"));
@@ -217,7 +218,11 @@ client.on("interactionCreate", async interaction => {
       });
     });
 
-    await interaction.reply({ embeds: [embed], ephemeral: true });
+    // 👇 followUp instead of reply
+    await interaction.followUp({
+      embeds: [embed],
+      ephemeral: true
+    });
   }
 });
 
