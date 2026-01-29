@@ -239,7 +239,7 @@ client.on("interactionCreate", async interaction => {
       embeds: [embed]
     });
   }
-}
+});
 client.login(TOKEN);
 
 
