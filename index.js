@@ -204,13 +204,17 @@ client.on("interactionCreate", async interaction => {
   }
 
   // ===== Modal Submit =====
-  // ===== Modal Submit =====
   if (interaction.isModalSubmit()) {
+    // ✅ acknowledge the modal FIRST
+    await interaction.deferReply({ flags: 64 });
+
     const [jsonFile, bossName] = interaction.customId.split(":")[1].split("|");
     const killCount = Number(interaction.fields.getTextInputValue("kill_count"));
 
     const boss = loadBosses(jsonFile).find(b => b.name === bossName);
-    if (!boss) return;
+    if (!boss) {
+      return interaction.editReply({ content: "❌ Boss not found." });
+    }
 
     await logInteraction(interaction.user, bossName, jsonFile, killCount);
 
@@ -229,15 +233,13 @@ client.on("interactionCreate", async interaction => {
           : `$${total.toFixed(2)}`
       });
     });
-
-    // 👇 followUp instead of reply
-    await interaction.followUp({
-      embeds: [embed],
-      ephemeral: true
+  
+    // ✅ now EDIT the deferred reply
+    await interaction.editReply({
+      embeds: [embed]
     });
   }
-});
-
+}
 client.login(TOKEN);
 
 
