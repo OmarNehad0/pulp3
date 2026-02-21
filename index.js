@@ -17,7 +17,20 @@ const client = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
   partials: [Partials.Channel]
 });
-
+function buildBaseEmbed(title, description) {
+  return new EmbedBuilder()
+    .setColor(0x2b2d31)
+    .setAuthor({
+      name: process.env.BOT_NAME,
+      iconURL: process.env.BOT_AVATAR,
+      url: process.env.BOT_DISCORD_INVITE
+    })
+    .setThumbnail(process.env.BOT_AVATAR)
+    .setTitle(title)
+    .setDescription(description || "")
+    .setTimestamp()
+    .setFooter({ text: "PVM Calculator System" });
+}
 const TOKEN = process.env.TOKEN;
 const CLIENT_ID = process.env.CLIENT_ID;
 const GUILD_ID = process.env.GUILD_ID;
@@ -151,9 +164,26 @@ if (interaction.isChatInputCommand() && interaction.commandName === "start") {
     return interaction.reply({ content: "❌ No permission.", flags: 64 });
   }
 
-  const row = buildCategoryMenu();
+  const embed = buildBaseEmbed(
+    "⚔️ PVM Boss Calculator",
+    "Select a category below to begin."
+  );
+
+  const menu = new StringSelectMenuBuilder()
+    .setCustomId("category_select")
+    .setPlaceholder("Choose a Boss Category")
+    .addOptions(
+      JSON_FILES.map(file => ({
+        label: file.replace(".json", ""),
+        value: file,
+        emoji: EMOJI_MAP[file]?.split(" | ")[0] || "📁"
+      }))
+    );
+
+  const row = new ActionRowBuilder().addComponents(menu);
 
   await interaction.reply({
+    embeds: [embed],
     components: [row],
     ephemeral: false
   });
@@ -167,16 +197,22 @@ if (interaction.isChatInputCommand() && interaction.commandName === "start") {
 
 // ===== Category Select =====
 if (interaction.isStringSelectMenu() && interaction.customId === "category_select") {
-  const jsonFile = interaction.values[0];
 
+  const jsonFile = interaction.values[0];
   const bosses = loadBosses(jsonFile);
+
   if (!bosses.length) {
     return interaction.reply({ content: "❌ No bosses found.", flags: 64 });
   }
 
+  const embed = buildBaseEmbed(
+    `📂 ${jsonFile.replace(".json", "")}`,
+    "Select a boss below."
+  );
+
   const bossMenu = new StringSelectMenuBuilder()
     .setCustomId(`boss_select:${jsonFile}`)
-    .setPlaceholder(`Select Boss`)
+    .setPlaceholder("Choose a Boss")
     .addOptions(
       bosses.map(b => ({
         label: b.name,
@@ -185,10 +221,32 @@ if (interaction.isStringSelectMenu() && interaction.customId === "category_selec
       }))
     );
 
+  const row = new ActionRowBuilder().addComponents(bossMenu);
+
   await interaction.reply({
-    components: [new ActionRowBuilder().addComponents(bossMenu)],
+    embeds: [embed],
+    components: [row],
     ephemeral: false
   });
+}
+if (interaction.isStringSelectMenu() && interaction.customId.startsWith("boss_select:")) {
+
+  const [jsonFile, bossName] = interaction.values[0].split("|");
+
+  const modal = new ModalBuilder()
+    .setCustomId(`killcount_modal:${jsonFile}|${bossName}`)
+    .setTitle("Kill Count")
+    .addComponents(
+      new ActionRowBuilder().addComponents(
+        new TextInputBuilder()
+          .setCustomId("kill_count")
+          .setLabel("Enter Number of Kills")
+          .setStyle(TextInputStyle.Short)
+          .setRequired(true)
+      )
+    );
+
+  await interaction.showModal(modal);
 }
   // ===== Modal Submit =====
   if (interaction.isModalSubmit()) {
@@ -205,9 +263,10 @@ if (interaction.isStringSelectMenu() && interaction.customId === "category_selec
 
     await logInteraction(interaction.user, bossName, jsonFile, killCount);
 
-    const embed = new EmbedBuilder()
-      .setTitle(boss.name)
-      .setColor(0x8B0000);
+    const embed = buildBaseEmbed(
+      `🐲 ${boss.name}`,
+      `Kill Count: **${killCount}**`
+    );
 
     boss.items.forEach(item => {
       const total = item.price * killCount;
@@ -217,10 +276,10 @@ if (interaction.isStringSelectMenu() && interaction.customId === "category_selec
         name: `${item.emoji || "🔨"} ${item.name}`,
         value: discountPercent
           ? `~~$${total.toFixed(2)}~~ → **$${final.toFixed(2)}**`
-          : `$${total.toFixed(2)}`
+          : `$${total.toFixed(2)}`,
+        inline: true
       });
     });
-  
     // ✅ now EDIT the deferred reply
     await interaction.editReply({
       embeds: [embed]
