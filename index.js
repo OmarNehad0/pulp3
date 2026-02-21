@@ -81,28 +81,19 @@ function hasAllowedRole(member) {
   return member.roles.cache.some(r => ALLOWED_ROLE_IDS.has(r.id));
 }
 
-function buildRowsForFiles(files) {
-  const rows = [];
+function buildCategoryMenu() {
+  const menu = new StringSelectMenuBuilder()
+    .setCustomId("category_select")
+    .setPlaceholder("Select a Category")
+    .addOptions(
+      JSON_FILES.map(file => ({
+        label: file.replace(".json", ""),
+        value: file,
+        emoji: EMOJI_MAP[file]?.split(" | ")[0] || "📁"
+      }))
+    );
 
-  files.forEach(file => {
-    const bosses = loadBosses(file);
-    if (!bosses.length) return;
-
-    const menu = new StringSelectMenuBuilder()
-      .setCustomId(`boss_select:${file}`)
-      .setPlaceholder(`${EMOJI_MAP[file] || ""}${file.replace(".json", "")}`)
-      .addOptions(
-        bosses.map(b => ({
-          label: b.name,
-          value: `${file}|${b.name}`,
-          emoji: b.emoji || "🔨"
-        }))
-      );
-
-    rows.push(new ActionRowBuilder().addComponents(menu));
-  });
-
-  return rows;
+  return new ActionRowBuilder().addComponents(menu);
 }
 
 async function logInteraction(user, bossName, jsonFile, killCount) {
@@ -155,28 +146,18 @@ client.on("ready", async () => {
 client.on("interactionCreate", async interaction => {
 
   // ===== /start =====
-  if (interaction.isChatInputCommand() && interaction.commandName === "start") {
-    if (!hasAllowedRole(interaction.member)) {
-      return interaction.reply({ content: "❌ No permission.", flags: 64 });
-    }
-
-    const rows = buildRowsForFiles(JSON_FILES);
-    const chunks = chunkArray(rows, 5);
-
-    // first message must be reply
-    await interaction.reply({
-      components: chunks[0],
-      ephemeral: false
-    });
-
-    // remaining menus = followUps
-    for (let i = 1; i < chunks.length; i++) {
-      await interaction.followUp({
-        components: chunks[i],
-        ephemeral: false
-      });
-    }
+if (interaction.isChatInputCommand() && interaction.commandName === "start") {
+  if (!hasAllowedRole(interaction.member)) {
+    return interaction.reply({ content: "❌ No permission.", flags: 64 });
   }
+
+  const row = buildCategoryMenu();
+
+  await interaction.reply({
+    components: [row],
+    ephemeral: false
+  });
+}
 
   // ===== Discount =====
   if (interaction.isChatInputCommand() && interaction.commandName === "pvm_discount") {
@@ -184,25 +165,31 @@ client.on("interactionCreate", async interaction => {
     return interaction.reply({ content: `✅ Discount set to ${discountPercent}%`, flags: 64 });
   }
 
-  // ===== Select Menu =====
-  if (interaction.isStringSelectMenu()) {
-    const [jsonFile, bossName] = interaction.values[0].split("|");
+// ===== Category Select =====
+if (interaction.isStringSelectMenu() && interaction.customId === "category_select") {
+  const jsonFile = interaction.values[0];
 
-    const modal = new ModalBuilder()
-      .setCustomId(`killcount_modal:${jsonFile}|${bossName}`)
-      .setTitle("Kill Count")
-      .addComponents(
-        new ActionRowBuilder().addComponents(
-          new TextInputBuilder()
-            .setCustomId("kill_count")
-            .setLabel("Number of kills")
-            .setStyle(TextInputStyle.Short)
-            .setRequired(true)
-        )
-      );
-    await interaction.showModal(modal);
+  const bosses = loadBosses(jsonFile);
+  if (!bosses.length) {
+    return interaction.reply({ content: "❌ No bosses found.", flags: 64 });
   }
 
+  const bossMenu = new StringSelectMenuBuilder()
+    .setCustomId(`boss_select:${jsonFile}`)
+    .setPlaceholder(`Select Boss`)
+    .addOptions(
+      bosses.map(b => ({
+        label: b.name,
+        value: `${jsonFile}|${b.name}`,
+        emoji: b.emoji || "🔨"
+      }))
+    );
+
+  await interaction.reply({
+    components: [new ActionRowBuilder().addComponents(bossMenu)],
+    ephemeral: false
+  });
+}
   // ===== Modal Submit =====
   if (interaction.isModalSubmit()) {
     // ✅ acknowledge the modal FIRST
