@@ -21,11 +21,11 @@ function buildBaseEmbed(title, description) {
   return new EmbedBuilder()
     .setColor(0x2b2d31)
     .setAuthor({
-      name: process.env.BOT_NAME,
-      iconURL: process.env.BOT_AVATAR,
-      url: process.env.BOT_DISCORD_INVITE
+      name: process.env.BOT_NAME || "PVM Calculator",
+      iconURL: process.env.BOT_AVATAR || null,
+      url: process.env.BOT_DISCORD_INVITE || null
     })
-    .setThumbnail(process.env.BOT_AVATAR)
+    .setThumbnail(process.env.BOT_AVATAR || null)
     .setTitle(title)
     .setDescription(description || "")
     .setTimestamp()
