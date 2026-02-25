@@ -198,13 +198,11 @@ if (interaction.isChatInputCommand() && interaction.commandName === "start") {
 // ===== Category Select =====
 if (interaction.isStringSelectMenu() && interaction.customId === "category_select") {
 
-  await interaction.deferUpdate(); // ⭐ THIS IS THE MAGIC
-
   const jsonFile = interaction.values[0];
   const bosses = loadBosses(jsonFile);
 
   if (!bosses.length) {
-    return interaction.followUp({ content: "❌ No bosses found.", ephemeral: true });
+    return interaction.reply({ content: "❌ No bosses found.", ephemeral: true });
   }
 
   const embed = buildBaseEmbed(
@@ -225,16 +223,19 @@ if (interaction.isStringSelectMenu() && interaction.customId === "category_selec
 
   const row = new ActionRowBuilder().addComponents(bossMenu);
 
-  await interaction.followUp({
+  await interaction.update({
     embeds: [embed],
     components: [row]
   });
 }
 if (interaction.isStringSelectMenu() && interaction.customId.startsWith("boss_select:")) {
 
-  await interaction.deferUpdate(); // ⭐ ADD THIS LINE
-
   const [jsonFile, bossName] = interaction.values[0].split("|");
+
+  // ⭐ THIS IS THE IMPORTANT LINE
+  await interaction.update({
+    components: interaction.message.components
+  });
 
   const modal = new ModalBuilder()
     .setCustomId(`killcount_modal:${jsonFile}|${bossName}`)
