@@ -198,11 +198,13 @@ if (interaction.isChatInputCommand() && interaction.commandName === "start") {
 // ===== Category Select =====
 if (interaction.isStringSelectMenu() && interaction.customId === "category_select") {
 
+  await interaction.deferUpdate(); // ⭐ THIS IS THE MAGIC
+
   const jsonFile = interaction.values[0];
   const bosses = loadBosses(jsonFile);
 
   if (!bosses.length) {
-    return interaction.reply({ content: "❌ No bosses found.", flags: 64 });
+    return interaction.followUp({ content: "❌ No bosses found.", ephemeral: true });
   }
 
   const embed = buildBaseEmbed(
@@ -223,13 +225,14 @@ if (interaction.isStringSelectMenu() && interaction.customId === "category_selec
 
   const row = new ActionRowBuilder().addComponents(bossMenu);
 
-  await interaction.reply({
+  await interaction.followUp({
     embeds: [embed],
-    components: [row],
-    ephemeral: false
+    components: [row]
   });
 }
 if (interaction.isStringSelectMenu() && interaction.customId.startsWith("boss_select:")) {
+
+  await interaction.deferUpdate(); // ⭐ ADD THIS LINE
 
   const [jsonFile, bossName] = interaction.values[0].split("|");
 
