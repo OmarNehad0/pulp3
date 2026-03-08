@@ -1,4 +1,4 @@
-// pvm-boss-calculator.js
+// pvm-boss-calculator-stateless.js
 const {
   Client,
   GatewayIntentBits,
@@ -10,13 +10,9 @@ const {
   TextInputBuilder,
   TextInputStyle,
   EmbedBuilder,
-  ButtonBuilder,
-  ButtonStyle
 } = require("discord.js");
 const { REST } = require("@discordjs/rest");
 const fs = require("fs");
-const Pagination = require("customizable-discordjs-pagination");
-const _ = require('lodash');
 
 const client = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
@@ -27,7 +23,6 @@ const client = new Client({
 const TOKEN = process.env.TOKEN;
 const CLIENT_ID = process.env.CLIENT_ID;
 const GUILD_ID = process.env.GUILD_ID;
-const LOG_CHANNEL_ID = "1433919895875092593";
 
 const JSON_FILES = [
   "MegaScales.json",
@@ -60,12 +55,6 @@ const EMOJI_MAP = {
 };
 
 let discountPercent = 0;
-const ALLOWED_ROLE_IDS = new Set([
-  "1433480285688692856",
-  "1433451021736087743",
-  "1434344428767809537",
-  "1433848962166685778",
-]);
 
 // ===== HELPERS =====
 function loadBosses(filePath) {
@@ -76,88 +65,25 @@ function loadBosses(filePath) {
   }
 }
 
-function hasAllowedRole(member) {
-  return member.roles.cache.some((r) => ALLOWED_ROLE_IDS.has(r.id));
+function buildBaseEmbed(title, description) {
+  return new EmbedBuilder()
+    .setColor(0x2b2d31)
+    .setAuthor({
+      name: process.env.BOT_NAME || "PVM Calculator",
+      iconURL: process.env.BOT_AVATAR || null,
+      url: process.env.BOT_DISCORD_INVITE || null,
+    })
+    .setThumbnail(process.env.BOT_AVATAR || null)
+    .setTitle(title)
+    .setDescription(description || "")
+    .setTimestamp()
+    .setFooter({ text: "PVM Calculator System" });
 }
 
-// ===== LOGGING =====
-async function logInteraction(user, bossName, jsonFile, killCount) {
-  const channel = await client.channels.fetch(LOG_CHANNEL_ID);
-  await channel.send({
-    embeds: [
-      new EmbedBuilder()
-        .setTitle("🧾 Boss Calculation Log")
-        .setColor("Blue")
-        .addFields(
-          { name: "👤 User", value: `${user.tag} (${user.id})` },
-          { name: "🐲 Boss", value: bossName },
-          { name: "📂 Category", value: jsonFile.replace(".json", "") },
-          { name: "⚔️ Kill Count", value: killCount.toString() }
-        )
-        .setTimestamp(),
-    ],
-  });
-}
-
-// ===== RESPONSE CLASS (clone of BotResponse) =====
-class PVMResponse {
-  constructor(interaction) {
-    this.response = new EmbedBuilder()
-      .setColor(0x2b2d31)
-      .setAuthor({
-        name: process.env.BOT_NAME || "PVM Calculator",
-        iconURL: process.env.BOT_AVATAR || null,
-        url: process.env.BOT_DISCORD_INVITE || null,
-      })
-      .setThumbnail(process.env.BOT_AVATAR || null)
-      .setTimestamp();
-    this.components = [];
-    this.interaction = interaction;
-  }
-
-  setTitle(title) {
-    this.response.setTitle(title);
-    return this;
-  }
-
-  setDescription(description) {
-    this.response.setDescription(description);
-    return this;
-  }
-
-  addField(name, value, inline = true) {
-    this.response.addFields({ name, value, inline });
-    return this;
-  }
-
-  addFields(fields) {
-    this.response.addFields(fields);
-    return this;
-  }
-
-  setComponent(component) {
-    this.components.push(component);
-    return this;
-  }
-
-  async reply(ephemeral = true) {
-    const send = this.components.length
-      ? { embeds: [this.response], components: this.components, flags: ephemeral ? 64 : undefined }
-      : { embeds: [this.response], flags: ephemeral ? 64 : undefined };
-    await this.interaction.reply(send);
-  }
-
-  async followUp() {
-    const send = this.components.length
-      ? { embeds: [this.response], components: this.components, flags: 64 }
-      : { embeds: [this.response], flags: 64 };
-    await this.interaction.followUp(send);
-  }
-}
-
-// ===== SLASH COMMAND REGISTRATION =====
+// ===== REGISTER SLASH COMMANDS =====
 client.once("ready", async () => {
   console.log(`Logged in as ${client.user.tag}`);
+
   const rest = new REST({ version: "10" }).setToken(TOKEN);
   await rest.put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), {
     body: [
@@ -166,7 +92,12 @@ client.once("ready", async () => {
         name: "pvm_discount",
         description: "Set discount for bosses",
         options: [
-          { name: "percent", description: "Discount percentage", type: 4, required: true },
+          {
+            name: "percent",
+            description: "Discount percentage (1-100)",
+            type: 4,
+            required: true,
+          },
         ],
       },
     ],
@@ -177,10 +108,7 @@ client.once("ready", async () => {
 client.on("interactionCreate", async (interaction) => {
   // ===== /start =====
   if (interaction.isChatInputCommand() && interaction.commandName === "start") {
-    if (!hasAllowedRole(interaction.member)) {
-      return new PVMResponse(interaction).setDescription("❌ No permission.").reply();
-    }
-
+    const embed = buildBaseEmbed("⚔️ PVM Boss Calculator", "Select a category below.");
     const categoryMenu = new StringSelectMenuBuilder()
       .setCustomId("category_select")
       .setPlaceholder("Choose a Category")
@@ -193,29 +121,22 @@ client.on("interactionCreate", async (interaction) => {
       );
 
     const row = new ActionRowBuilder().addComponents(categoryMenu);
-
-    await new PVMResponse(interaction)
-      .setTitle("⚔️ PVM Boss Calculator")
-      .setDescription("Select a category below.")
-      .setComponent(row)
-      .reply(false);
+    await interaction.reply({ embeds: [embed], components: [row], ephemeral: false });
   }
 
   // ===== /pvm_discount =====
   if (interaction.isChatInputCommand() && interaction.commandName === "pvm_discount") {
     discountPercent = interaction.options.getInteger("percent");
-    return new PVMResponse(interaction)
-      .setDescription(`✅ Discount set to ${discountPercent}%`)
-      .reply();
+    return interaction.reply({ content: `✅ Discount set to ${discountPercent}%`, ephemeral: true });
   }
 
   // ===== Category Select =====
   if (interaction.isStringSelectMenu() && interaction.customId === "category_select") {
     const jsonFile = interaction.values[0];
     const bosses = loadBosses(jsonFile);
-    if (!bosses.length)
-      return new PVMResponse(interaction).setDescription("❌ No bosses found.").reply();
+    if (!bosses.length) return interaction.reply({ content: "❌ No bosses found.", ephemeral: true });
 
+    const embed = buildBaseEmbed(`📂 ${jsonFile.replace(".json", "")}`, "Select a boss below.");
     const bossMenu = new StringSelectMenuBuilder()
       .setCustomId(`boss_select:${jsonFile}`)
       .setPlaceholder("Choose a Boss")
@@ -228,17 +149,16 @@ client.on("interactionCreate", async (interaction) => {
       );
 
     const row = new ActionRowBuilder().addComponents(bossMenu);
-
-    await new PVMResponse(interaction)
-      .setTitle(`📂 ${jsonFile.replace(".json", "")}`)
-      .setDescription("Select a boss below.")
-      .setComponent(row)
-      .reply(false);
+    await interaction.update({ embeds: [embed], components: [row] });
   }
 
   // ===== Boss Select =====
   if (interaction.isStringSelectMenu() && interaction.customId.startsWith("boss_select:")) {
     const [jsonFile, bossName] = interaction.values[0].split("|");
+
+    // فقط لتحديث المكون بدون حفظ أي بيانات
+    await interaction.update({ components: interaction.message.components });
+
     const modal = new ModalBuilder()
       .setCustomId(`killcount_modal:${jsonFile}|${bossName}`)
       .setTitle("Kill Count")
@@ -257,33 +177,28 @@ client.on("interactionCreate", async (interaction) => {
 
   // ===== Modal Submit =====
   if (interaction.isModalSubmit() && interaction.customId.startsWith("killcount_modal:")) {
-    await interaction.deferReply({ flags: 64 });
+    await interaction.deferReply({ ephemeral: true });
 
     const [jsonFile, bossName] = interaction.customId.split(":")[1].split("|");
     const killCount = Number(interaction.fields.getTextInputValue("kill_count"));
     const boss = loadBosses(jsonFile).find((b) => b.name === bossName);
-    if (!boss)
-      return new PVMResponse(interaction).setDescription("❌ Boss not found.").reply();
+    if (!boss) return interaction.editReply({ content: "❌ Boss not found." });
 
-    await logInteraction(interaction.user, bossName, jsonFile, killCount);
-
-    const response = new PVMResponse(interaction)
-      .setTitle(`🐲 ${boss.name}`)
-      .setDescription(`Kill Count: **${killCount}**`);
-
+    const embed = buildBaseEmbed(`🐲 ${boss.name}`, `Kill Count: **${killCount}**`);
     boss.items.forEach((item) => {
       const total = item.price * killCount;
       const final = total * (1 - discountPercent / 100);
-      response.addField(
-        `${item.emoji || "🔨"} ${item.name}`,
-        discountPercent ? `~~$${total.toFixed(2)}~~ → **$${final.toFixed(2)}**` : `$${total.toFixed(2)}`
-      );
+      embed.addFields({
+        name: `${item.emoji || "🔨"} ${item.name}`,
+        value: discountPercent ? `~~$${total.toFixed(2)}~~ → **$${final.toFixed(2)}**` : `$${total.toFixed(2)}`,
+        inline: true,
+      });
     });
 
-    await response.reply();
+    // الرد مباشرة، بدون حفظ أي شيء
+    await interaction.editReply({ embeds: [embed] });
   }
 });
 
 // ===== LOGIN =====
 client.login(TOKEN);
-
