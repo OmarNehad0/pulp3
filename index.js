@@ -16,7 +16,7 @@ const {
 const { REST } = require("@discordjs/rest");
 const fs = require("fs");
 const Pagination = require("customizable-discordjs-pagination");
-const _ = require("lodash-contrib");
+const _ = require('lodash');
 
 const client = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
